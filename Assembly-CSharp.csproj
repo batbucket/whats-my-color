@@ -46,8 +46,10 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\scripts\Color.cs" />
+     <Compile Include="Assets\scripts\Chroma.cs" />
+     <Compile Include="Assets\scripts\ColorButton.cs" />
      <Compile Include="Assets\scripts\ColorWord.cs" />
+     <Compile Include="Assets\scripts\Helper.cs" />
      <Compile Include="Assets\scripts\Inquisitor.cs" />
      <Compile Include="Assets\scripts\LetterSpacing.cs" />
      <Compile Include="Assets\scripts\Word.cs" />

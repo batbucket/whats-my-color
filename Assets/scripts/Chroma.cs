@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class Color : MonoBehaviour {
+public class Chroma : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
