@@ -4,11 +4,11 @@ using System.Collections;
 
 public class Inquisitor : MonoBehaviour {
 
-	enum Question {
+	public enum Question {
 		Color, Word
 	}
 
-	enum Answer {
+	public enum Answer {
 		Color, Word
 	}
 
@@ -26,15 +26,15 @@ public class Inquisitor : MonoBehaviour {
 	
 	int score;
 	float time;
-	Transform timeBar;
-	public const float TIME_LIMIT = 5.0f;
+	GameObject timeBar;
+	public const float TIME_LIMIT = 3.0f;
 	
 	// Use this for initialization
 	void Start() {
 		question = GameObject.Find("Text/Question").GetComponent<Text>();
 		cw = GameObject.Find("Text/Word").GetComponent<ChromaWord>();
 		scoreText = GameObject.Find("Text/Score").GetComponent<Text>();
-		timeBar = GameObject.Find("Background/Timebar").GetComponent<Transform>();
+		timeBar = GameObject.Find("Background/Timebar");
 
 		b1 = GameObject.Find ("Buttons/1").GetComponent<ChromaButton>();
 		b2 = GameObject.Find ("Buttons/2").GetComponent<ChromaButton>();
@@ -98,6 +98,7 @@ public class Inquisitor : MonoBehaviour {
 	void correctAnswer() {
 		score++;
 		cw.randomizeChromaWord();
+		time = 0.0f;
 		Debug.Log ("You was right!");
 	}
 
@@ -109,10 +110,20 @@ public class Inquisitor : MonoBehaviour {
 	void Update () {
 		scoreText.text = score.ToString();
 
+		if (time < 0) {
+			timeBar.GetComponent<Image>().color = Color.gray;
+		} else {
+			timeBar.GetComponent<Image>().color = Color.black;
+		}
+
 		if (TIME_LIMIT > 0 && time < TIME_LIMIT) {
 		time += Time.deltaTime;
 			Debug.Log ((TIME_LIMIT - time) / TIME_LIMIT);
-			timeBar.transform.localScale = new Vector3(transform.localScale.x * timeRemainingAsPercentage(), transform.localScale.y, transform.localScale.z);
+			timeBar.GetComponent<Transform>().transform.localScale = new Vector3(transform.localScale.x * timeRemainingAsPercentage(), transform.localScale.y, transform.localScale.z);
+		} else if (false || TIME_LIMIT <= 0) { //lol bypass unreachable code error
+			timeBar.SetActive(false);
+		} else {
+			incorrectAnswer();
 		}
 	}
 }
