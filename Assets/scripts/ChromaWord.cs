@@ -1,22 +1,17 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
-public class ColorWord : MonoBehaviour {
-	
-	public enum Chroma {
-		RED, ORANGE, GREEN, BLUE, PURPLE, YELLOW 
-	}
-	
-	public enum Word {
-		RED, ORANGE, GREEN, BLUE, PURPLE, YELLOW
-	}
-	
+public class ChromaWord : MonoBehaviour {
+
+	Text text;
 	Chroma chroma;
 	Word word;
 	
 	// Use this for initialization
 	void Start () {
-		generateColorWord();
+		this.text = GetComponent<Text>();
+		randomizeChromaWord();
 	}
 	
 	//Overloaded Start
@@ -33,7 +28,7 @@ public class ColorWord : MonoBehaviour {
 		return word;
 	}
 	
-	public bool isColor(Chroma chroma) {
+	public bool isChroma(Chroma chroma) {
 		return this.chroma.Equals(chroma);
 	}
 	
@@ -42,7 +37,7 @@ public class ColorWord : MonoBehaviour {
 	}
 	
 	public bool isChromaAndWord(Chroma chroma, Word word) {
-		return isColor(chroma) && isWord(word);
+		return isChroma(chroma) && isWord(word);
 	}
 	
 	public override bool Equals(object obj) {
@@ -52,12 +47,12 @@ public class ColorWord : MonoBehaviour {
 			return false;
 		}
 		
-		ColorWord cw = (ColorWord) obj;
+		ChromaWord cw = (ChromaWord) obj;
 		
 		return this.chroma.Equals(cw.getChroma()) && this.word.Equals(cw.getWord());
 	}
 	
-	public bool isColorWord(ColorWord cw) {
+	public bool isChromaWord(ChromaWord cw) {
 		return isChromaAndWord(cw.getChroma(), cw.getWord());
 	}
 
@@ -66,16 +61,17 @@ public class ColorWord : MonoBehaviour {
 	}
 
 	public static Word generateWord() {
-		return (Word) Random.Range (0, System.Enum.GetNames(typeof(Chroma)).Length);
+		return (Word) Random.Range (0, System.Enum.GetNames(typeof(Word)).Length);
 	}
 
-	public void generateColorWord(){
+	public void randomizeChromaWord(){
 		this.chroma = generateChroma();
 		this.word = generateWord();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		
+		text.color = Helper.translate(chroma);
+		text.text = word.ToString();
 	}
 }
