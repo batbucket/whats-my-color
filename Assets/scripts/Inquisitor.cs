@@ -26,8 +26,11 @@ public class Inquisitor : MonoBehaviour {
 	
 	int score;
 	float time;
+	float timeLimit;
 	GameObject timeBar;
-	public const float TIME_LIMIT = 3.0f;
+	float timeDecayAccumulated;
+	const float TIME_LIMIT = 3.0f;
+	public const float TIME_DECAY = 0.95f;
 	
 	// Use this for initialization
 	void Start() {
@@ -92,20 +95,26 @@ public class Inquisitor : MonoBehaviour {
 
 	void incorrectAnswer() {
 		score = 0;
+		resetTimeLimit();
 		Debug.Log ("You was wrong!");
+	}
+
+	void resetTimeLimit() {
+		timeLimit = TIME_LIMIT;
 	}
 
 	void correctAnswer() {
 		score++;
 		cw.randomizeChromaWord();
 		time = 0.0f;
+		timeLimit *= TIME_DECAY;
 		Debug.Log ("You was right!");
 	}
 
 	float timeRemainingAsPercentage() {
-		return (TIME_LIMIT - time) / TIME_LIMIT;
+		return (timeLimit - time) / timeLimit;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		scoreText.text = score.ToString();
@@ -116,11 +125,11 @@ public class Inquisitor : MonoBehaviour {
 			timeBar.GetComponent<Image>().color = Color.black;
 		}
 
-		if (TIME_LIMIT > 0 && time < TIME_LIMIT) {
+		if (timeLimit > 0 && time < timeLimit) {
 		time += Time.deltaTime;
-			Debug.Log ((TIME_LIMIT - time) / TIME_LIMIT);
+			Debug.Log ((timeLimit - time) / timeLimit);
 			timeBar.GetComponent<Transform>().transform.localScale = new Vector3(transform.localScale.x * timeRemainingAsPercentage(), transform.localScale.y, transform.localScale.z);
-		} else if (false || TIME_LIMIT <= 0) { //lol bypass unreachable code error
+		} else if (false || timeLimit <= 0) { //lol bypass unreachable code error
 			timeBar.SetActive(false);
 		} else {
 			incorrectAnswer();
