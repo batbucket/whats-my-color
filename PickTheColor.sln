@@ -1,6 +1,8 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
+Project("{9A76B4B5-198B-383C-7854-B61FDB50987F}") = "PickTheColor", "Assembly-CSharp-firstpass.csproj", "{5F1A6216-A798-1D3D-1B42-A2C5319E35B8}"
+EndProject
 Project("{9A76B4B5-198B-383C-7854-B61FDB50987F}") = "PickTheColor", "Assembly-CSharp.csproj", "{92E20DFB-E9A4-416A-7823-5DBBC3095E86}"
 EndProject
 Global
@@ -9,6 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5F1A6216-A798-1D3D-1B42-A2C5319E35B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F1A6216-A798-1D3D-1B42-A2C5319E35B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F1A6216-A798-1D3D-1B42-A2C5319E35B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F1A6216-A798-1D3D-1B42-A2C5319E35B8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{92E20DFB-E9A4-416A-7823-5DBBC3095E86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{92E20DFB-E9A4-416A-7823-5DBBC3095E86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92E20DFB-E9A4-416A-7823-5DBBC3095E86}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -17,7 +23,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																													GlobalSection(MonoDevelopProperties) = preSolution
+																																									GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1

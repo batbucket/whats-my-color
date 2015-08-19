@@ -51,6 +51,10 @@ public class ChromaWord : MonoBehaviour {
 		
 		return this.chroma.Equals(cw.getChroma()) && this.word.Equals(cw.getWord());
 	}
+
+	public override int GetHashCode() {
+		return text.GetHashCode();
+	}
 	
 	public bool isChromaWord(ChromaWord cw) {
 		return isChromaAndWord(cw.getChroma(), cw.getWord());

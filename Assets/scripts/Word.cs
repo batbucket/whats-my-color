@@ -2,5 +2,5 @@
 using System.Collections;
 
 public enum Word {
-	RED, CYAN, GREEN, BLUE, PURPLE, YELLOW
+	RED, CYAN, GREEN, BLUE, MAGENTA, YELLOW
 }

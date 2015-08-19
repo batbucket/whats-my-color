@@ -5,11 +5,11 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{92E20DFB-E9A4-416A-7823-5DBBC3095E86}</ProjectGuid>
+	<ProjectGuid>{5F1A6216-A798-1D3D-1B42-A2C5319E35B8}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
-	<AssemblyName>Assembly-CSharp</AssemblyName>
+	<AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
 	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
 	<FileAlignment>512</FileAlignment>
 	<BaseDirectory>Assets</BaseDirectory>
@@ -46,13 +46,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\scripts\Chroma.cs" />
-     <Compile Include="Assets\scripts\ChromaButton.cs" />
-     <Compile Include="Assets\scripts\ChromaWord.cs" />
-     <Compile Include="Assets\scripts\Helper.cs" />
-     <Compile Include="Assets\scripts\Inquisitor.cs" />
-     <Compile Include="Assets\scripts\LetterSpacing.cs" />
-     <Compile Include="Assets\scripts\Word.cs" />
+     <Compile Include="Assets\plugins\Extended ColorX.cs" />
+     <Compile Include="Assets\plugins\HSBColor.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/UnityEditor/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -65,10 +60,6 @@
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files (x86)/UnityEditor/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
  </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{5F1A6216-A798-1D3D-1B42-A2C5319E35B8}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

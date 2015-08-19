@@ -14,7 +14,7 @@ public class Helper {
 			return Color.green;
 		} else if (chroma.Equals(Chroma.BLUE)) {
 			return Color.blue;
-		} else if (chroma.Equals(Chroma.PURPLE)) {
+		} else if (chroma.Equals(Chroma.MAGENTA)) {
 			return Color.magenta;
 		} else if (chroma.Equals(Chroma.YELLOW))
 			return Color.yellow;

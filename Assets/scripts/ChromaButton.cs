@@ -6,7 +6,10 @@ public class ChromaButton : MonoBehaviour {
 
 	Button button;
 	public Chroma chroma;
-	Color color;
+	public Word word;
+	
+	const int MAGENTA_FONT_SIZE = 72;
+	const int DEFAULT_FONT_SIZE = 80;
 
 	// Use this for initialization
 	void Awake () {
@@ -21,12 +24,25 @@ public class ChromaButton : MonoBehaviour {
 		return chroma;
 	}
 
+	public Word getWord() {
+		return word;
+	}
+
 	public void changeChroma(Chroma chroma) {
 		this.chroma = chroma;
+	}
+
+	public void changeWord(Word word) {
+		this.word = word;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if (chroma.Equals(Chroma.MAGENTA)) {
+			button.GetComponentInChildren<Text>().fontSize = MAGENTA_FONT_SIZE;
+		} else {
+			button.GetComponentInChildren<Text>().fontSize = DEFAULT_FONT_SIZE;
+		}
 		button.GetComponentInChildren<Text>().text = chroma.ToString();
 	}
 }
