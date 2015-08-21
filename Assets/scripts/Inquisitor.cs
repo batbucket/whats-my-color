@@ -12,7 +12,7 @@ public class Inquisitor : MonoBehaviour {
 		Color, Word
 	}
 
-	Text question;
+	//Text question;
 	ChromaWord cw;
 	Text scoreText;
 
@@ -34,7 +34,8 @@ public class Inquisitor : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start() {
-		question = GameObject.Find("Text/Question").GetComponent<Text>();
+
+		//question = GameObject.Find("Text/Question").GetComponent<Text>();
 		cw = GameObject.Find("Text/Word").GetComponent<ChromaWord>();
 		scoreText = GameObject.Find("Text/Score").GetComponent<Text>();
 		timeBar = GameObject.Find("Background/Timebar");
@@ -96,6 +97,8 @@ public class Inquisitor : MonoBehaviour {
 	void incorrectAnswer() {
 		score = 0;
 		resetTimeLimit();
+		resetTime();
+		cw.randomizeChromaWord();
 		Debug.Log ("You was wrong!");
 	}
 
@@ -103,10 +106,14 @@ public class Inquisitor : MonoBehaviour {
 		timeLimit = TIME_LIMIT;
 	}
 
+	void resetTime() {
+		time = 0.0f;
+	}
+
 	void correctAnswer() {
 		score++;
 		cw.randomizeChromaWord();
-		time = 0.0f;
+		resetTime();
 		timeLimit *= TIME_DECAY;
 		Debug.Log ("You was right!");
 	}
@@ -129,7 +136,7 @@ public class Inquisitor : MonoBehaviour {
 		time += Time.deltaTime;
 			Debug.Log ((timeLimit - time) / timeLimit);
 			timeBar.GetComponent<Transform>().transform.localScale = new Vector3(transform.localScale.x * timeRemainingAsPercentage(), transform.localScale.y, transform.localScale.z);
-		} else if (false || timeLimit <= 0) { //lol bypass unreachable code error
+		} else if (false || TIME_LIMIT <= 0) { //lol bypass unreachable code error
 			timeBar.SetActive(false);
 		} else {
 			incorrectAnswer();
