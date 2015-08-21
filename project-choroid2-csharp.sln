@@ -1,6 +1,8 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
+Project("{468A1794-BCBC-A01E-BFE3-3BE856647D23}") = "project-choroid2", "Assembly-CSharp-firstpass-vs.csproj", "{A0E7B230-97B0-9F20-4FFF-CE4CFBA206CD}"
+EndProject
 Project("{468A1794-BCBC-A01E-BFE3-3BE856647D23}") = "project-choroid2", "Assembly-CSharp-vs.csproj", "{2EA54735-72F0-3F57-ED34-EF64E024AF8F}"
 EndProject
 Global
@@ -9,6 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A0E7B230-97B0-9F20-4FFF-CE4CFBA206CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0E7B230-97B0-9F20-4FFF-CE4CFBA206CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0E7B230-97B0-9F20-4FFF-CE4CFBA206CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0E7B230-97B0-9F20-4FFF-CE4CFBA206CD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2EA54735-72F0-3F57-ED34-EF64E024AF8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2EA54735-72F0-3F57-ED34-EF64E024AF8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EA54735-72F0-3F57-ED34-EF64E024AF8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -17,7 +23,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-		GlobalSection(MonoDevelopProperties) = preSolution
+								GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
