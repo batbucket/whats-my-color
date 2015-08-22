@@ -29,7 +29,7 @@ public class Inquisitor : MonoBehaviour {
 	float timeLimit;
 	GameObject timeBar;
 	float timeDecayAccumulated;
-	const float TIME_LIMIT = 3.0f;
+	const float TIME_LIMIT = 5.0f;
 	public const float TIME_DECAY = 0.95f;
 	
 	// Use this for initialization
@@ -126,15 +126,16 @@ public class Inquisitor : MonoBehaviour {
 	void Update () {
 		scoreText.text = score.ToString();
 
-		if (time < 0) {
+		if (TIME_LIMIT < 0 || false) {
 			timeBar.GetComponent<Image>().color = Color.gray;
-		} else {
-			timeBar.GetComponent<Image>().color = Color.black;
 		}
 
 		if (timeLimit > 0 && time < timeLimit) {
 		time += Time.deltaTime;
 			Debug.Log ((timeLimit - time) / timeLimit);
+			Color start = timeBar.GetComponent<Image>().color;
+			Color end = Color.red;
+			timeBar.GetComponent<Image>().color = Color.Lerp(start, end, Time.deltaTime / timeLimit * 1.5f);
 			timeBar.GetComponent<Transform>().transform.localScale = new Vector3(transform.localScale.x * timeRemainingAsPercentage(), transform.localScale.y, transform.localScale.z);
 		} else if (false || TIME_LIMIT <= 0) { //lol bypass unreachable code error
 			timeBar.SetActive(false);
