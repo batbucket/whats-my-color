@@ -35,7 +35,14 @@ public class ChromaButton : MonoBehaviour {
 	public void changeWord(Word word) {
 		this.word = word;
 	}
-	
+
+	public Chroma randomChroma (){
+		System.Array values = Chroma.GetValues (typeof(Chroma));
+		Chroma randomchroma = (Chroma)values.GetValue (Random.Range(0, values.Length));
+		return randomchroma;
+	}
+
+
 	// Update is called once per frame
 	void Update () {
 		if (chroma.Equals(Chroma.MAGENTA)) {

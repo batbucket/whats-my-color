@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -99,7 +99,9 @@ public class Inquisitor : MonoBehaviour {
 		resetTimeLimit();
 		resetTime();
 		cw.randomizeChromaWord();
+		shuffleButton ();
 		Debug.Log ("You was wrong!");
+
 	}
 
 	void resetTimeLimit() {
@@ -115,8 +117,22 @@ public class Inquisitor : MonoBehaviour {
 		cw.randomizeChromaWord();
 		resetTime();
 		timeLimit *= TIME_DECAY;
+		shuffleButton ();
 		Debug.Log ("You was right!");
+
 	}
+
+	void shuffleButton(){
+		foreach (ChromaButton cb in chromaButtons) {
+			cb.changeChroma(cb.randomChroma());
+		}
+		for (int i = 0; i < chromaButtons.Length; i++) {
+			chromaButtonAssigner(chromaButtons[i]);
+		}
+
+	}
+			        
+	
 
 	float timeRemainingAsPercentage() {
 		return (timeLimit - time) / timeLimit;
