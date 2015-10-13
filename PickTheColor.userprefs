@@ -1,8 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\boxingsim\Assets\Scripts\Boxing.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\ButtonManager.cs">
     <Files>
-      <File FileName="..\boxingsim\Assets\Scripts\Boxing.cs" Line="126" Column="36" />
+      <File FileName="Assets\scripts\Timer.cs" Line="56" Column="8" />
+      <File FileName="Assets\scripts\Inquisitor.cs" Line="41" Column="67" />
+      <File FileName="Assets\scripts\ColorWord.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\ColorButton.cs" Line="16" Column="3" />
+      <File FileName="Assets\scripts\ButtonManager.cs" Line="13" Column="32" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

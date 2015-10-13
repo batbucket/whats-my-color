@@ -45,24 +45,17 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\scripts\Chroma.cs" />
-     <Compile Include="Assets\scripts\ChromaButton.cs" />
-     <Compile Include="Assets\scripts\ChromaWord.cs" />
-     <Compile Include="Assets\scripts\Helper.cs" />
+     <Compile Include="Assets\scripts\ButtonManager.cs" />
+     <Compile Include="Assets\scripts\ColorButton.cs" />
+     <Compile Include="Assets\scripts\ColorWord.cs" />
      <Compile Include="Assets\scripts\Inquisitor.cs" />
+     <Compile Include="Assets\scripts\Scorer.cs" />
      <Compile Include="Assets\scripts\Timer.cs" />
-     <Compile Include="Assets\scripts\Word.cs" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>C:/Program Files (x86)/UnityEditor/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/UnityEditor/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files (x86)/UnityEditor/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Program Files (x86)/UnityEditor/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>C:/Program Files (x86)/UnityEditor/Editor/Data/Managed/Mono.Cecil.dll</HintPath>

@@ -4,17 +4,8 @@ using System.Collections;
 
 public class Inquisitor : MonoBehaviour {
 
-	public enum Question {
-		Color, Word
-	}
-
-	public enum Answer {
-		Color, Word
-	}
-
 	//Text question;
 	ChromaWord cw;
-	Text scoreText;
 
 	ChromaButton b1;
 	ChromaButton b2;
@@ -23,22 +14,24 @@ public class Inquisitor : MonoBehaviour {
 	ChromaButton b5;
 	ChromaButton b6;
 	ChromaButton[] chromaButtons;
-	
+
+	Scorer scorer;
+	Timer timer;
+
 	int score;
-	float time;
 	float timeLimit;
-	GameObject timeBar;
-	float timeDecayAccumulated;
-	const float TIME_LIMIT = 5.0f;
-	public const float TIME_DECAY = 0.95f;
+
+	public const float INITIAL_TIME_LIMIT = 5.0f;
+	public const float TIME_DECAY = 0.05f;
 	
 	// Use this for initialization
 	void Start() {
 
 		//question = GameObject.Find("Text/Question").GetComponent<Text>();
 		cw = GameObject.Find("Text/Word").GetComponent<ChromaWord>();
-		scoreText = GameObject.Find("Text/Score").GetComponent<Text>();
-		timeBar = GameObject.Find("Background/Timebar");
+		scorer = GameObject.Find("Text/Score").GetComponent<Scorer>();
+		timer = GameObject.Find("Background/Timebar").GetComponent<Timer>();
+		resetTime();
 
 		b1 = GameObject.Find ("Buttons/1").GetComponent<ChromaButton>();
 		b2 = GameObject.Find ("Buttons/2").GetComponent<ChromaButton>();
@@ -58,6 +51,11 @@ public class Inquisitor : MonoBehaviour {
 		for (int i = 0; i < chromaButtons.Length; i++) {
 			chromaButtonAssigner(chromaButtons[i]);
 		}
+	}
+
+	void resetTime() {
+		timeLimit = INITIAL_TIME_LIMIT;
+		timer.setTime(INITIAL_TIME_LIMIT);
 	}
 
 	void chromaButtonAssigner(ChromaButton cb) {
@@ -96,7 +94,6 @@ public class Inquisitor : MonoBehaviour {
 
 	void incorrectAnswer() {
 		score = 0;
-		resetTimeLimit();
 		resetTime();
 		cw.randomizeChromaWord();
 		shuffleButton ();
@@ -104,20 +101,16 @@ public class Inquisitor : MonoBehaviour {
 
 	}
 
-	void resetTimeLimit() {
-		timeLimit = TIME_LIMIT;
-	}
-
-	void resetTime() {
-		time = 0.0f;
+	void reduceTime() {
+		timeLimit *= (1 - TIME_DECAY);
+		timer.setTime(timeLimit);
 	}
 
 	void correctAnswer() {
 		score++;
 		cw.randomizeChromaWord();
-		resetTime();
-		timeLimit *= TIME_DECAY;
-		shuffleButton ();
+		reduceTime();
+		//shuffleButton ();
 		Debug.Log ("You was right!");
 
 	}
@@ -131,32 +124,18 @@ public class Inquisitor : MonoBehaviour {
 		}
 
 	}
-			        
-	
 
-	float timeRemainingAsPercentage() {
-		return (timeLimit - time) / timeLimit;
+	void updateScore() {
+		scorer.setValue(score);
 	}
 
 	// Update is called once per frame
 	void Update () {
-		scoreText.text = score.ToString();
+		updateScore();
 
-		if (TIME_LIMIT < 0 || false) {
-			timeBar.GetComponent<Image>().color = Color.gray;
-		}
-
-		if (timeLimit > 0 && time < timeLimit) {
-		time += Time.deltaTime;
-			Debug.Log ((timeLimit - time) / timeLimit);
-			Color start = timeBar.GetComponent<Image>().color;
-			Color end = Color.red;
-			timeBar.GetComponent<Image>().color = Color.Lerp(start, end, Time.deltaTime / timeLimit * 1.5f);
-			timeBar.GetComponent<Transform>().transform.localScale = new Vector3(transform.localScale.x * timeRemainingAsPercentage(), transform.localScale.y, transform.localScale.z);
-		} else if (false || TIME_LIMIT <= 0) { //lol bypass unreachable code error
-			timeBar.SetActive(false);
-		} else {
+		if (timer.isFinished()) {
 			incorrectAnswer();
 		}
+
 	}
 }
