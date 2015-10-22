@@ -48,8 +48,10 @@
      <Compile Include="Assets\scripts\model\ButtonType.cs" />
      <Compile Include="Assets\scripts\model\ColorButton.cs" />
      <Compile Include="Assets\scripts\model\ColorWord.cs" />
+     <Compile Include="Assets\scripts\model\ColoredWordType.cs" />
      <Compile Include="Assets\scripts\model\QuestionType.cs" />
      <Compile Include="Assets\scripts\model\Tool.cs" />
+     <Compile Include="Assets\scripts\presenter\Game.cs" />
      <Compile Include="Assets\scripts\view\ButtonManager.cs" />
      <Compile Include="Assets\scripts\view\QuestionManager.cs" />
      <Compile Include="Assets\scripts\view\ScoreManager.cs" />

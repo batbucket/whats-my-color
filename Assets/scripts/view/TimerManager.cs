@@ -3,15 +3,18 @@ using UnityEngine.UI;
 using UnityEngine.Assertions;
 using System.Collections;
 
+/**
+ * This class manages the TimerBar on the top of the screen
+ */
 public class TimerManager : MonoBehaviour {
 	Image timeBar;
 	Transform timeBarTransform;
 	
-	public Color firstColor;
-	public Color secondColor;
-	public Color thirdColor;
+	public Color firstColor; //The 'healthy' color
+	public Color secondColor; //The 'injured' color
+	public Color thirdColor; //The 'dying' color
 	
-	const float TRANSITION_POINT = .5f;
+	const float TRANSITION_POINT = .5f; //The point at which the colors will transition to the next one
 	
 	Color DISABLED_COLOR = Color.gray;
 	Color DEAD_COLOR = Color.black;
@@ -37,6 +40,9 @@ public class TimerManager : MonoBehaviour {
 		Assert.IsNotNull(timeBarTransform);
 	}
 
+	/**
+	 * Set the time, which starts counting down immediately
+	 */
 	public void setTime(float both) {
 		setCurrentValue(both);
 		setMaxValue(both);
@@ -53,7 +59,10 @@ public class TimerManager : MonoBehaviour {
 	public void disable() {
 		this.initiated = false;
 	}
-	
+
+	/**
+	 * Returns whether or not the timerbar is enabled
+	 */
 	public bool isInitiated() {
 		return initiated;
 	}
@@ -93,7 +102,6 @@ public class TimerManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log(isFinished());
 		if (isInitiated()) {
 			decrementTime();
 			changeColor();

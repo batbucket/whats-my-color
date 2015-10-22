@@ -3,8 +3,11 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.Assertions;
 
+/**
+ * This class manages the score display
+ */
 public class ScoreManager : MonoBehaviour {
-	int value;
+	int value; //Number that will be displayed by the score text
 	
 	// Use this for initialization
 	void Start () {

@@ -6,7 +6,7 @@ using System.Collections;
 public class ColorButton : MonoBehaviour {
 
 	Button button;
-	ColorWord colorWord;
+	ColorWord colorWord; //Color and Word should match
 	ButtonType buttonType;
 	public static readonly Color WORD_MODE_COLOR = Color.white;
 	bool colorWordSet;
@@ -14,7 +14,7 @@ public class ColorButton : MonoBehaviour {
 	const int DEFAULT_FONT_SIZE = 80;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		this.button = gameObject.GetComponent<Button>();
 		this.buttonType = ButtonType.WORD;
 		this.colorWord = new ColorWord(Color.grey, "UNDEFINED"); //Change this with setting the colorWord
@@ -37,34 +37,50 @@ public class ColorButton : MonoBehaviour {
 	public void setColorWord(ColorWord other) {
 		if (!colorWordSet) {
 			this.colorWord = other;
+			colorWordSet = true;
 		} else {
 			throw new UnityException("Cannot set a ColorButton's ColorWord twice! Use swap() to switch!");
 		}
+	}
+
+	/**
+	 * Works like setColorWord(), but doesn't have the warning
+	 * if you use this multiple times on one button
+	 * Used in swap()
+	 */ 
+	void forceSetColorWord(ColorWord other) {
+		this.colorWord = other;
 	}
 	
 	public void setButtonType(ButtonType newButtonType) {
 		this.buttonType = newButtonType;
 	}
 
-	private ColorWord getColorWord() {
+	public ColorWord getColorWord() {
 		return colorWord;
 	}
 
-	private void setTextAlpha(int alpha) {
+	public void swapColorWord(ColorButton other) {
+		ColorWord temp = other.getColorWord();
+		other.forceSetColorWord(this.getColorWord());
+		this.forceSetColorWord(temp);
+	}
+
+	void setTextAlpha(int alpha) {
 		Color color = button.GetComponentInChildren<Text>().color;
 		color.a = alpha;
 		button.GetComponentInChildren<Text>().color = color;
 	}
 
-	private void setTextInvisible() {
+	void setTextInvisible() {
 		setTextAlpha(0);
 	}
 
-	private void setTextVisible() {
+	void setTextVisible() {
 		setTextAlpha(1);
 	}
 
-	private void updateButtonText() {
+	void updateButtonText() {
 		if (buttonType == ButtonType.WORD) {
 			button.GetComponentInChildren<Text>().text = colorWord.word;
 			setTextVisible();
@@ -75,7 +91,7 @@ public class ColorButton : MonoBehaviour {
 		}
 	}
 
-	private void updateButtonDisplay() {;
+	void updateButtonDisplay() {;
 		if (buttonType == ButtonType.WORD) {
 			setButtonColor(WORD_MODE_COLOR);
 		} else if (buttonType == ButtonType.COLOR){
@@ -85,17 +101,11 @@ public class ColorButton : MonoBehaviour {
 		}
 	}
 
-	private void setButtonColor(Color color) {
+	void setButtonColor(Color color) {
 		ColorBlock cb = button.GetComponent<Button>().colors;
 		cb.normalColor = color;
 		cb.highlightedColor = color;
 		button.GetComponent<Button>().colors = cb;
-	}
-
-	public void swapColorWord(ColorButton other) {
-		ColorWord temp = other.getColorWord();
-		other.setColorWord(this.getColorWord());
-		this.setColorWord(temp);
 	}
 
 	// Update is called once per frame

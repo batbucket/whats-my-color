@@ -1,13 +1,14 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\view\QuestionManager.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\presenter\Game.cs">
     <Files>
-      <File FileName="Assets\scripts\view\QuestionManager.cs" Line="51" Column="3" />
+      <File FileName="Assets\scripts\model\ColorButton.cs" Line="78" Column="2" />
+      <File FileName="Assets\scripts\view\ButtonManager.cs" Line="15" Column="12" />
       <File FileName="Assets\scripts\view\ScoreManager.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\view\TimerManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\model\ColorButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\model\ColorWord.cs" Line="24" Column="8" />
-      <File FileName="Assets\scripts\model\Tool.cs" Line="13" Column="1" />
+      <File FileName="Assets\scripts\view\QuestionManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\presenter\Game.cs" Line="118" Column="5" />
+      <File FileName="Assets\scripts\model\ColorWord.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
