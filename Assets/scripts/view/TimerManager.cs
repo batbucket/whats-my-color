@@ -66,6 +66,10 @@ public class TimerManager : MonoBehaviour {
 	public bool isInitiated() {
 		return initiated;
 	}
+
+	public float getCurrentTime() {
+		return currentValue;
+	}
 	
 	void setCurrentValue(float value) {
 		currentValue = value;

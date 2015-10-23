@@ -128,7 +128,8 @@ abstract public class Game : MonoBehaviour {
 	 * Things that happen when you get the answer wrong
 	 */
 	void incorrectAnswer() {
-		Debug.Log("You was wrong!");
+		incorrectEffects();
+		Application.LoadLevel("Start");
 	} 
 
 	void incorrectEffects() {
