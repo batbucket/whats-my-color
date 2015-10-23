@@ -9,4 +9,13 @@ public class Tool : MonoBehaviour {
 		Array values = Enum.GetValues(typeof(T));
 		return  (T)values.GetValue(UnityEngine.Random.Range(0, values.Length));
 	}
+
+	/**
+	 * Converts an AudioClip to an AudioSource
+	 */
+	public static AudioSource clipToSource(AudioClip clip) {
+		AudioSource source = new AudioSource();
+		source.clip = clip;
+		return source;
+	}
 }

@@ -11,6 +11,13 @@ public class QuestionManager : MonoBehaviour {
 	ColorWord colorWord; //The internal ColorWord that affects the coloredWord display
 
 	/**
+	 * These fields are used for the text bounce effect
+	 */
+	public const float MAX_SIZE_INCREASE = .2f; //The largest possible amount the text can increase by before it starts getting smaller
+	public const float INCREASE_RATE = .5f; //Larger numbers means larger rate of shifting
+	bool increasing;
+
+	/**
 	 * The type of Question that is asked of the user
 	 * Currently we have:
 	 * RIGHT_COLOR: User must answer the Color of the ColorWord in some format
@@ -107,8 +114,30 @@ public class QuestionManager : MonoBehaviour {
 		setColoredWordColor(colorWord.color);
 	}
 
+	void textBounce() {
+		Vector4 cwScale = coloredWord.GetComponent<Transform>().localScale;
+		if (cwScale.x > 1 + MAX_SIZE_INCREASE) {
+			increasing = false;
+		} else if (cwScale.x < 1) {
+			increasing = true;
+		}
+
+		float timeValue = Time.deltaTime * INCREASE_RATE;
+
+		if (increasing) {
+			cwScale.x += timeValue;
+			cwScale.y += timeValue;
+		} else {
+			cwScale.x -= timeValue;
+			cwScale.y -= timeValue;
+		}
+
+		coloredWord.GetComponent<Transform>().localScale = cwScale;
+	}
+
 	void Update() {
 		updateQuestionText();
 		updateColoredWordDisplay();
+		textBounce();
 	}
 }

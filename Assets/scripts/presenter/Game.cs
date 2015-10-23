@@ -16,6 +16,7 @@ public class Game : MonoBehaviour {
 	ScoreManager scoreManager;
 	ButtonManager buttonManager;
 	TimerManager timerManager;
+	EffectsManager effectsManager;
 
 	public const int TIME_PER_QUESTION = 5;
 	int score;
@@ -26,6 +27,7 @@ public class Game : MonoBehaviour {
 		this.scoreManager = gameObject.GetComponentInChildren<ScoreManager>();
 		this.buttonManager = gameObject.GetComponentInChildren<ButtonManager>();
 		this.timerManager = gameObject.GetComponentInChildren<TimerManager>();
+		this.effectsManager = gameObject.GetComponentInChildren<EffectsManager>();
 		nullCheck();
 		gameInitialization();
 	}
@@ -35,6 +37,7 @@ public class Game : MonoBehaviour {
 		Assert.IsNotNull(this.scoreManager);
 		Assert.IsNotNull(this.scoreManager);
 		Assert.IsNotNull(this.timerManager);
+		Assert.IsNotNull(this.effectsManager);
 	}
 
 	void gameInitialization() {
@@ -70,7 +73,6 @@ public class Game : MonoBehaviour {
 		 */
 		for (int i = 0; i < cbs.Length; i++) {
 			cbs[i].setColorWord(ColorWord.generateMatchingColorWord(i));
-			Debug.Log(cbs[i].getWord());
 		}
 
 		/**
@@ -110,9 +112,14 @@ public class Game : MonoBehaviour {
 	 * Things that happen when you get the answer right
 	 */
 	void correctAnswer() {
+		correctEffects();
 		updateScore();
 		nextQuestion();
 		resetTime();
+	}
+
+	void correctEffects() {
+		effectsManager.indicateSuccess();
 	}
 
 	/**
@@ -120,6 +127,10 @@ public class Game : MonoBehaviour {
 	 */
 	void incorrectAnswer() {
 		Application.Quit();
+	} 
+
+	void incorrectEffects() {
+
 	}
 
 	/**

@@ -15,7 +15,6 @@ public class ButtonManager : MonoBehaviour {
 	void Awake () {
 		this.colorButtons = GetComponentsInChildren<ColorButton>();
 		nullCheck();
-		Debug.Log (colorButtons.Length + " buttons were linked");
 	}
 
 	void nullCheck() {
