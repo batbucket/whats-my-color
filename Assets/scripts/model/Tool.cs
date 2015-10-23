@@ -18,4 +18,8 @@ public class Tool : MonoBehaviour {
 		source.clip = clip;
 		return source;
 	}
+
+	public static bool randomBoolean() {
+		return (UnityEngine.Random.Range(0, 1) == 1);
+	}
 }

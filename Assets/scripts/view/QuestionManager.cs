@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Assertions;
 
@@ -25,14 +25,14 @@ public class QuestionManager : MonoBehaviour {
 	 * RIGHT_WORD: User must answer the Word of the ColorWord in some format
 	 * WRONG_WORD
 	 */
-	QuestionType questionType;
+	QuestionMode questionMode;
 
 	/**
 	 * How the ColoredWord will be displayed
 	 * TEXT: Show the ColorWord as normal (A colored text)
 	 * SHAPE: Show the ColorWord as some shape that is colored the same as the ColorWord
 	 */
-	ColoredWordType coloredWordType;
+	ColoredWordMode coloredWordMode;
 
 	public const string RIGHT_COLOR_TEXT = "What's the COLOR?";
 	public const string WRONG_COLOR_TEXT = "What's NOT the COLOR?";
@@ -45,50 +45,84 @@ public class QuestionManager : MonoBehaviour {
 		this.question = gameObject.GetComponent<Text>();
 		this.coloredWord = gameObject.GetComponentsInChildren<Text>()[1]; //Index 0 has the parent's script. Weird.
 
-		this.questionType = QuestionType.RIGHT_COLOR; //Default type of question
-		this.coloredWordType = ColoredWordType.TEXT; //Default type of display
+		this.questionMode = QuestionMode.RIGHT_COLOR; //Default type of question
+		this.coloredWordMode = ColoredWordMode.TEXT; //Default type of display
 		this.colorWord = ColorWord.generateRandomColorWord();
 
 		Assert.IsNotNull(this.question);
 		Assert.IsNotNull(this.colorWord);
 	}
 
-	public ColorWord getColorWord() {
-		return colorWord;
-	}
-
-	public string getWord() {
-		return colorWord.word;
-	}
-
-	public Color getColor() {
-		return colorWord.color;
-	}
-
 	public void randomizeColorWord() {
 		colorWord = ColorWord.generateRandomColorWord();
 	}
 
-	public void randomizeQuestionType() {
-		questionType = Tool.GetRandomEnum<QuestionType>();
+	public void randomizeQuestionMode() {
+		if (coloredWordMode == ColoredWordMode.SHAPE) {
+			if (Tool.randomBoolean()) {
+				questionMode = QuestionMode.RIGHT_COLOR;
+			} else {
+				questionMode = QuestionMode.WRONG_COLOR;
+			}
+		} else {
+		questionMode = Tool.GetRandomEnum<QuestionMode>();
+		}
 	}
 
-	public void setQuestionType(QuestionType questionType) {
-		this.questionType = questionType;
+	public void randomizeColorWordMode() {
+		coloredWordMode = Tool.GetRandomEnum<ColoredWordMode>();
+	}
+	
+	public bool isCorrectAnswer(ColorWord cw) {
+		if (questionMode == QuestionMode.RIGHT_COLOR) {
+			return cw.color.Equals(this.getColor());
+		} else if (questionMode == QuestionMode.WRONG_COLOR) {
+			return !cw.color.Equals(this.getColor());
+		} else if (questionMode == QuestionMode.RIGHT_WORD) {
+			return cw.word.Equals(this.getWord());
+		} else if (questionMode == QuestionMode.WRONG_WORD) {
+			return !cw.word.Equals(this.getWord());
+		} else {
+			throw new UnityException("Unknown enum type: " + this.questionMode);
+		}
 	}
 
-	public void setColoredWordType(ColoredWordType coloredWordType) {
-		this.coloredWordType = coloredWordType;
+	public ColoredWordMode getColoredWordMode() {
+		return coloredWordMode;
+	}
+
+	public QuestionMode getQuestionMode() {
+		return questionMode;
+	}
+	
+	ColorWord getColorWord() {
+		return colorWord;
+	}
+	
+	string getWord() {
+		return colorWord.word;
+	}
+	
+	Color getColor() {
+		return colorWord.color;
+	}
+
+	void setQuestionMode(QuestionMode questionMode) {
+		this.questionMode = questionMode;
+	}
+
+	void setColoredWordMode(ColoredWordMode coloredWordMode) {
+		this.coloredWordMode = coloredWordMode;
 	}
 
 	void updateQuestionText() {
-		if (questionType == QuestionType.RIGHT_COLOR) {
+		if (questionMode == QuestionMode.RIGHT_COLOR) {
 			question.text = RIGHT_COLOR_TEXT;
-		} else if (questionType == QuestionType.WRONG_COLOR) {
+		} else if (questionMode == QuestionMode.WRONG_COLOR) {
 			question.text = WRONG_COLOR_TEXT;
-		} else if (questionType == QuestionType.RIGHT_WORD) {
+		} else if (questionMode == QuestionMode.RIGHT_WORD) {
 			question.text = RIGHT_WORD_TEXT;
-		} else if (questionType == QuestionType.WRONG_WORD) {
+		} else if (questionMode == QuestionMode.WRONG_WORD) {
 			question.text = WRONG_WORD_TEXT;
 		} else {
 			throw new UnityException("Unknown enum type: " + this);
@@ -104,12 +138,12 @@ public class QuestionManager : MonoBehaviour {
 	}
 
 	void updateColoredWordDisplay() {
-		if (coloredWordType == ColoredWordType.TEXT) {
+		if (coloredWordMode == ColoredWordMode.TEXT) {
 			setColoredWordText(colorWord.word);
-		} else if (coloredWordType == ColoredWordType.SHAPE) {
+		} else if (coloredWordMode == ColoredWordMode.SHAPE) {
 			setColoredWordText(COLOR_MODE_TEXT);
 		} else {
-			throw new UnityException("Unknown enum: " + coloredWordType);
+			throw new UnityException("Unknown enum: " + coloredWordMode);
 		}
 		setColoredWordColor(colorWord.color);
 	}

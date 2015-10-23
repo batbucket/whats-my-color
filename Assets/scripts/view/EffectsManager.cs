@@ -3,8 +3,14 @@ using System.Collections;
 using UnityEngine.Assertions;
 
 public class EffectsManager : MonoBehaviour {
+	/**
+	 * Point to the success and failure gameobjects
+	 * which hold the their respective sounds and sprites
+	 */
 	GameObject success;
 	GameObject failure;
+
+	public const int DECAY_SPEED = 10;
 
 	// Use this for initialization
 	void Start () {
@@ -44,15 +50,18 @@ public class EffectsManager : MonoBehaviour {
 		g.GetComponent<SpriteRenderer>().color = c;
 		
 	}
-	
+
+	/**
+	 * Images decay by growing larger and having their alpha reduced
+	 */
 	void imageDecay(GameObject g) {
 		Color c = g.GetComponent<SpriteRenderer>().color;
 		
 		if (c.a > 0) {
-			c.a -= Time.deltaTime;
+			c.a -= Time.deltaTime * DECAY_SPEED;
 			Vector3 v = g.GetComponent<Transform>().localScale;
-			v.x += Time.deltaTime * 10;
-			v.y += Time.deltaTime * 10;
+			v.x += Time.deltaTime * DECAY_SPEED;
+			v.y += Time.deltaTime * DECAY_SPEED;
 			g.GetComponent<Transform>().localScale = v;
 			g.GetComponent<SpriteRenderer>().color = c;
 		}

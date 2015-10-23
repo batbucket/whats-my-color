@@ -11,14 +11,15 @@ using System.Collections;
  * One type of question: What is the correct color
  * No button shuffling
  */
-public class Game : MonoBehaviour {
-	QuestionManager questionManager;
-	ScoreManager scoreManager;
-	ButtonManager buttonManager;
-	TimerManager timerManager;
-	EffectsManager effectsManager;
+abstract public class Game : MonoBehaviour {
+	protected QuestionManager questionManager;
+	protected ScoreManager scoreManager;
+	protected ButtonManager buttonManager;
+	protected TimerManager timerManager;
+	protected EffectsManager effectsManager;
 
-	public const int TIME_PER_QUESTION = 5;
+	public const float INITIAL_TIME_PER_QUESTION = 5.0f;
+	protected float timePerQuestion;
 	int score;
 
 	// Use this for initialization
@@ -28,6 +29,7 @@ public class Game : MonoBehaviour {
 		this.buttonManager = gameObject.GetComponentInChildren<ButtonManager>();
 		this.timerManager = gameObject.GetComponentInChildren<TimerManager>();
 		this.effectsManager = gameObject.GetComponentInChildren<EffectsManager>();
+		this.timePerQuestion = INITIAL_TIME_PER_QUESTION;
 		nullCheck();
 		gameInitialization();
 	}
@@ -105,7 +107,7 @@ public class Game : MonoBehaviour {
 	 * matches the color held by the question
 	 */
 	bool isCorrectAnswer(ColorWord cwOfButton) {
-		return cwOfButton.color.Equals(questionManager.getColor());
+		return this.questionManager.isCorrectAnswer(cwOfButton);
 	}
 
 	/**
@@ -126,22 +128,23 @@ public class Game : MonoBehaviour {
 	 * Things that happen when you get the answer wrong
 	 */
 	void incorrectAnswer() {
-		Application.Quit();
+		Debug.Log("You was wrong!");
 	} 
 
 	void incorrectEffects() {
-
+		effectsManager.indicateFailure();
 	}
 
 	/**
 	 * This one just randomizes
 	 */
-	void nextQuestion() {
+	protected virtual void nextQuestion() {
 		questionManager.randomizeColorWord();
 	}
 
-	void resetTime() {
-		timerManager.setTime(TIME_PER_QUESTION);
+	protected virtual void resetTime() {
+		timerManager.setTime(timePerQuestion);
+		Debug.Log ("New time: " + timePerQuestion);
 	}
 
 	void updateScore() {
@@ -149,7 +152,7 @@ public class Game : MonoBehaviour {
 	}
 
 	void setUpTimerManager() {
-		timerManager.setTime(TIME_PER_QUESTION);
+		timerManager.setTime(timePerQuestion);
 	}
 
 	bool isOutOfTime() {

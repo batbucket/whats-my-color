@@ -39,6 +39,24 @@ public class ButtonManager : MonoBehaviour {
 		return colorButtons;
 	}
 
+	public void randomizeButtonMode() {
+		setButtonMode(Tool.GetRandomEnum<ButtonMode>());
+	}
+
+	void setWordMode() {
+		setButtonMode(ButtonMode.WORD);
+	}
+
+	void setColorMode() {
+		setButtonMode(ButtonMode.COLOR);
+	}
+
+	void setButtonMode(ButtonMode mode) {
+		for (int i = 0; i < colorButtons.Length; i++) {
+			colorButtons[i].setButtonMode(mode);
+		}
+	}
+
 	/**
 	 * Swap the ColorWords of two buttons given their indicies
      */

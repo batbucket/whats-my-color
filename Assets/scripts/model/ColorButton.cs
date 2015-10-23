@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Assertions;
 using System.Collections;
@@ -7,7 +7,7 @@ public class ColorButton : MonoBehaviour {
 
 	Button button;
 	ColorWord colorWord; //Color and Word should match
-	ButtonType buttonType;
+	ButtonMode buttonMode;
 	public static readonly Color WORD_MODE_COLOR = Color.white;
 	bool colorWordSet;
 	
@@ -16,7 +16,7 @@ public class ColorButton : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		this.button = gameObject.GetComponent<Button>();
-		this.buttonType = ButtonType.WORD;
+		this.buttonMode = ButtonMode.WORD;
 		this.colorWord = new ColorWord(Color.grey, "UNDEFINED"); //Change this with setting the colorWord
 
 		Assert.IsNotNull(this.button);
@@ -52,8 +52,8 @@ public class ColorButton : MonoBehaviour {
 		this.colorWord = other;
 	}
 	
-	public void setButtonType(ButtonType newButtonType) {
-		this.buttonType = newButtonType;
+	public void setButtonMode(ButtonMode newButtonMode) {
+		this.buttonMode = newButtonMode;
 	}
 
 	public ColorWord getColorWord() {
@@ -81,23 +81,23 @@ public class ColorButton : MonoBehaviour {
 	}
 
 	void updateButtonText() {
-		if (buttonType == ButtonType.WORD) {
+		if (buttonMode == ButtonMode.WORD) {
 			button.GetComponentInChildren<Text>().text = colorWord.word;
 			setTextVisible();
-		} else if (buttonType == ButtonType.COLOR) {
+		} else if (buttonMode == ButtonMode.COLOR) {
 			setTextInvisible();
 		} else {
-			throw new UnityException("Unknown Button Type: " + buttonType);
+			throw new UnityException("Unknown Button Type: " + buttonMode);
 		}
 	}
 
 	void updateButtonDisplay() {;
-		if (buttonType == ButtonType.WORD) {
+		if (buttonMode == ButtonMode.WORD) {
 			setButtonColor(WORD_MODE_COLOR);
-		} else if (buttonType == ButtonType.COLOR){
+		} else if (buttonMode == ButtonMode.COLOR){
 			setButtonColor(colorWord.color);
 		} else {
-			throw new UnityException("Unknown Button Type: " + buttonType);
+			throw new UnityException("Unknown Button Type: " + buttonMode);
 		}
 	}
 
