@@ -7,6 +7,8 @@ using System.Collections;
  * Button shuffle
  */
 public class HardGame : Game {
+	public const int ID = 2;
+
 	public const float DECAY_RATE = .07f;
 	public const float TIME_FLOOR = 2.0f; //The minimum amount of time per question
 	

@@ -45,6 +45,13 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\scripts\manager\ButtonManager.cs" />
+     <Compile Include="Assets\scripts\manager\DifficultyButtonManager.cs" />
+     <Compile Include="Assets\scripts\manager\EffectsManager.cs" />
+     <Compile Include="Assets\scripts\manager\GameSelectionManager.cs" />
+     <Compile Include="Assets\scripts\manager\QuestionManager.cs" />
+     <Compile Include="Assets\scripts\manager\ScoreManager.cs" />
+     <Compile Include="Assets\scripts\manager\TimerManager.cs" />
      <Compile Include="Assets\scripts\model\ButtonMode.cs" />
      <Compile Include="Assets\scripts\model\ColorButton.cs" />
      <Compile Include="Assets\scripts\model\ColorWord.cs" />
@@ -57,11 +64,6 @@
      <Compile Include="Assets\scripts\presenter\ImpossibleGame.cs" />
      <Compile Include="Assets\scripts\presenter\NormalGame.cs" />
      <Compile Include="Assets\scripts\presenter\SampleGame.cs" />
-     <Compile Include="Assets\scripts\view\ButtonManager.cs" />
-     <Compile Include="Assets\scripts\view\EffectsManager.cs" />
-     <Compile Include="Assets\scripts\view\QuestionManager.cs" />
-     <Compile Include="Assets\scripts\view\ScoreManager.cs" />
-     <Compile Include="Assets\scripts\view\TimerManager.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/UnityEditor/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

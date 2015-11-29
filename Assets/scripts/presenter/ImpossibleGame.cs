@@ -9,6 +9,8 @@ using System.Collections;
  * 2 Button modes
  */
 public class ImpossibleGame : Game {
+	public const int ID = 3;
+
 	public const float DECAY_RATE = .09f;
 	public const float TIME_FLOOR = 2.0f; //The minimum amount of time per question
 	

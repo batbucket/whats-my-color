@@ -6,6 +6,8 @@ using System.Collections;
  * A time decay
  */
 public class NormalGame : Game {
+	public const int ID = 1;
+
 	public const float DECAY_RATE = .05f;
 	public const float TIME_FLOOR = 2.0f; //The minimum amount of time per question
 	
