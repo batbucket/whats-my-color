@@ -10,6 +10,7 @@ using System.Collections;
  */
 public class ImpossibleGame : Game {
 	public const int ID = 3;
+	public const string IMPOSSIBLE_SCORE_LOCATION = "Impossible_Score";
 
 	public const float DECAY_RATE = .09f;
 	public const float TIME_FLOOR = 2.0f; //The minimum amount of time per question
@@ -23,8 +24,11 @@ public class ImpossibleGame : Game {
 	protected override void nextQuestion() {
 		questionManager.randomizeColorWord();
 		buttonManager.shuffleButtons();
-		buttonManager.randomizeButtonMode();
-		questionManager.randomizeColorWordMode();
-		questionManager.randomizeQuestionMode(); //Must be called AFTER randomizing the ColorWordMode
+		buttonManager.randomizeButtonModes();
+		questionManager.randomizeQuestionMode();
+	}
+
+	protected override void saveScore() {
+		PlayerPrefs.SetInt(IMPOSSIBLE_SCORE_LOCATION, score);
 	}
 }

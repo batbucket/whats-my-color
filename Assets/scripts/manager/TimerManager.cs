@@ -49,7 +49,7 @@ public class TimerManager : MonoBehaviour {
 	}
 	
 	public bool isFinished() {
-		return currentValue == 0;
+		return currentValue <= 0;
 	}
 	
 	public void enable() {

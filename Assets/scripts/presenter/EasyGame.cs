@@ -9,8 +9,9 @@ using System.Collections;
  */
 public class EasyGame : Game {
 	public const int ID = 0;
+	public const string EASY_SCORE_LOCATION = "Easy_Score";
 
-	/**
-	 * This is all implemented by Game already
-	 */
+	protected override void saveScore() {
+		PlayerPrefs.SetInt(EASY_SCORE_LOCATION, score);
+	}
 }

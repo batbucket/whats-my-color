@@ -5,7 +5,7 @@ public class GameSelectionManager : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		int difficulty = PlayerPrefs.GetInt(DifficultyButtonManager.DIFFICULTY_ID_STORAGE_NAME);
+		int difficulty = PlayerPrefs.GetInt(ModeController.MODE_ID_LOCATION);
 		if (difficulty == EasyGame.ID) {
 			Debug.Log ("EasyMode Loaded");
 			gameObject.AddComponent<EasyGame>();

@@ -39,21 +39,29 @@ public class ButtonManager : MonoBehaviour {
 		return colorButtons;
 	}
 
-	public void randomizeButtonMode() {
-		setButtonMode(Tool.GetRandomEnum<ButtonMode>());
+	public void randomizeButtonModes() {
+		for (int i = 0; i < colorButtons.Length; i++) {
+			if (Random.value >= 0.5) {
+				setButtonMode(Tool.GetRandomEnum<ButtonMode>(), i);
+			}
+		}
 	}
 
 	void setWordMode() {
-		setButtonMode(ButtonMode.WORD);
+		setAllButtonModes(ButtonMode.WORD);
 	}
 
 	void setColorMode() {
-		setButtonMode(ButtonMode.COLOR);
+		setAllButtonModes(ButtonMode.COLOR);
 	}
 
-	void setButtonMode(ButtonMode mode) {
+	void setButtonMode(ButtonMode mode, int buttonIndex) {
+		colorButtons[buttonIndex].setButtonMode(mode);
+	}
+
+	void setAllButtonModes(ButtonMode mode) {
 		for (int i = 0; i < colorButtons.Length; i++) {
-			colorButtons[i].setButtonMode(mode);
+			setButtonMode(mode, i);
 		}
 	}
 

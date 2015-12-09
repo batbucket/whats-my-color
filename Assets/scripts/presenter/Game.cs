@@ -20,7 +20,7 @@ abstract public class Game : MonoBehaviour {
 
 	public const float INITIAL_TIME_PER_QUESTION = 5.0f;
 	protected float timePerQuestion;
-	int score;
+	protected int score;
 
 	// Use this for initialization
 	void Awake () {
@@ -129,7 +129,8 @@ abstract public class Game : MonoBehaviour {
 	 */
 	void incorrectAnswer() {
 		incorrectEffects();
-		Application.LoadLevel("Start");
+		saveScore();
+		Application.LoadLevel("Mode");
 	} 
 
 	void incorrectEffects() {
@@ -159,6 +160,8 @@ abstract public class Game : MonoBehaviour {
 	bool isOutOfTime() {
 		return timerManager.isFinished();
 	}
+
+	abstract protected void saveScore();
 
 	/**
 	 * Check if the user is out of time
