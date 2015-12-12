@@ -18,9 +18,14 @@ abstract public class Game : MonoBehaviour {
 	protected TimerManager timerManager;
 	protected EffectsManager effectsManager;
 
-	public const float INITIAL_TIME_PER_QUESTION = 5.0f;
+	public const float INITIAL_TIME_PER_QUESTION = 8.0f;
 	protected float timePerQuestion;
 	protected int score;
+
+	public const string GAME_MODE_LOCATION = "Game_Mode";
+	public const string LOSS_REASON_LOCATION = "Loss_Reason";
+	public const string TIME_OUT_MESSAGE = "OUT OF TIME...";
+	public const string WRONG_ANSWER_MESSAGE = "YOU CHOSE POORLY.";
 
 	// Use this for initialization
 	void Awake () {
@@ -95,6 +100,7 @@ abstract public class Game : MonoBehaviour {
 		if (isCorrectAnswer(cwOfButton)) {
 			correctAnswer();
 		} else {
+			saveLossReason(WRONG_ANSWER_MESSAGE);
 			incorrectAnswer();
 		}
 	}
@@ -130,6 +136,7 @@ abstract public class Game : MonoBehaviour {
 	void incorrectAnswer() {
 		incorrectEffects();
 		saveScore();
+		saveGameModeName();
 		Application.LoadLevel("Mode");
 	} 
 
@@ -163,11 +170,22 @@ abstract public class Game : MonoBehaviour {
 
 	abstract protected void saveScore();
 
+	void saveGameModeName() {
+		string s = this.GetType().Name;
+		s = s.Remove(s.Length - 3); //remove "Game" from class name
+		PlayerPrefs.SetString(GAME_MODE_LOCATION, s);
+	}
+
+	void saveLossReason(string reason) {
+		PlayerPrefs.GetString(LOSS_REASON_LOCATION, reason);
+	}
+
 	/**
 	 * Check if the user is out of time
 	 */
 	void Update () {
 		if (isOutOfTime()) {
+			saveLossReason(TIME_OUT_MESSAGE);
 			incorrectAnswer();
 		}
 	}

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -24,7 +25,7 @@ public class ModeController : MonoBehaviour {
 	}
 
 	public void confirmSelectionButtonClicked() {
-		Application.LoadLevel("GenericGame");
+		SceneManager.LoadScene("GenericGame");
 	}
 
 	public void easyButtonClicked() {
