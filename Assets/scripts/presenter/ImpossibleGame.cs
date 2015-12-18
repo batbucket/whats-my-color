@@ -9,13 +9,16 @@ using System.Collections;
  * 2 Button modes
  */
 public class ImpossibleGame : Game {
-	public const int ID = 3;
-	public const string IMPOSSIBLE_SCORE_LOCATION = "Impossible_Score";
+	public const int ID = 4;
+	public const string SCORE_LOCATION = "Impossible_Score";
+    public const string HISCORE_LOCATION = "Impossible_Hiscore";
 
-	public const float DECAY_RATE = .05f;
+    public const float DECAY_RATE = .05f;
 	public const float TIME_FLOOR = 1.0f; //The minimum amount of time per question
-	
-	protected override void resetTime() {
+
+    public const int SCORE_REQUIREMENT = 20;
+
+    protected override void resetTime() {
 		timePerQuestion = Mathf.Max(timePerQuestion * (1.0f - DECAY_RATE), TIME_FLOOR);
 		Debug.Log ("New time: " + timePerQuestion);
 		base.resetTime();
@@ -29,6 +32,10 @@ public class ImpossibleGame : Game {
 	}
 
 	protected override void saveScore() {
-		PlayerPrefs.SetInt(IMPOSSIBLE_SCORE_LOCATION, score);
+		PlayerPrefs.SetInt(SCORE_LOCATION, score);
 	}
+
+    public static bool hasMetRequirement() {
+        return PlayerPrefs.GetInt(HardGame.HISCORE_LOCATION) >= SCORE_REQUIREMENT;
+    }
 }

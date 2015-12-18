@@ -7,13 +7,16 @@ using System.Collections;
  * Button shuffle
  */
 public class HardGame : Game {
-	public const int ID = 2;
-	public const string HARD_SCORE_LOCATION = "Hard_Score";
+	public const int ID = 3;
+	public const string SCORE_LOCATION = "Hard_Score";
+    public const string HISCORE_LOCATION = "Hard_Hiscore";
 
-	public const float DECAY_RATE = .05f;
+    public const float DECAY_RATE = .05f;
 	public const float TIME_FLOOR = 1.0f; //The minimum amount of time per question
-	
-	protected override void resetTime() {
+
+    public const int SCORE_REQUIREMENT = 15;
+
+    protected override void resetTime() {
 		timePerQuestion = Mathf.Max(timePerQuestion * (1.0f - DECAY_RATE), TIME_FLOOR);
 		Debug.Log ("New time: " + timePerQuestion);
 		base.resetTime();
@@ -25,6 +28,10 @@ public class HardGame : Game {
 	}
 
 	protected override void saveScore() {
-		PlayerPrefs.SetInt(HARD_SCORE_LOCATION, score);
+		PlayerPrefs.SetInt(SCORE_LOCATION, score);
 	}
+
+    public static bool hasMetRequirement() {
+        return PlayerPrefs.GetInt(NormalGame.HISCORE_LOCATION) >= SCORE_REQUIREMENT;
+    }
 }

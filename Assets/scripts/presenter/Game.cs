@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.Assertions;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 /**
  * This class represents the most basic game mode:
@@ -134,15 +135,10 @@ abstract public class Game : MonoBehaviour {
 	 * Things that happen when you get the answer wrong
 	 */
 	void incorrectAnswer() {
-		incorrectEffects();
 		saveScore();
 		saveGameModeName();
-		Application.LoadLevel("Mode");
+		SceneManager.LoadScene("GameEnd");
 	} 
-
-	void incorrectEffects() {
-		effectsManager.indicateFailure();
-	}
 
 	/**
 	 * This one just randomizes
@@ -172,12 +168,12 @@ abstract public class Game : MonoBehaviour {
 
 	void saveGameModeName() {
 		string s = this.GetType().Name;
-		s = s.Remove(s.Length - 3); //remove "Game" from class name
+		s = s.Remove(s.Length - 4); //remove "Game" from class name
 		PlayerPrefs.SetString(GAME_MODE_LOCATION, s);
 	}
 
 	void saveLossReason(string reason) {
-		PlayerPrefs.GetString(LOSS_REASON_LOCATION, reason);
+		PlayerPrefs.SetString(LOSS_REASON_LOCATION, reason);
 	}
 
 	/**
