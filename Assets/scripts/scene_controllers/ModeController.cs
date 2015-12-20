@@ -121,10 +121,15 @@ public class ModeController : MonoBehaviour {
     }
 
     void conditionalModes() {
-        GameObject.Find("EasyButton").GetComponent<Button>().interactable = EasyGame.hasMetRequirement();
-        GameObject.Find("NormalButton").GetComponent<Button>().interactable = NormalGame.hasMetRequirement();
-        GameObject.Find("HardButton").GetComponent<Button>().interactable = HardGame.hasMetRequirement();
-        GameObject.Find("ImpossibleButton").GetComponent<Button>().interactable = ImpossibleGame.hasMetRequirement();
+        Button easyButton = GameObject.Find("EasyButton").GetComponent<Button>();
+        Button normalButton = GameObject.Find("NormalButton").GetComponent<Button>();
+        Button hardButton = GameObject.Find("HardButton").GetComponent<Button>();
+        Button impossibleButton = GameObject.Find("ImpossibleButton").GetComponent<Button>();
+
+        easyButton.interactable = EasyGame.hasMetRequirement();
+        normalButton.interactable = NormalGame.hasMetRequirement();
+        hardButton.interactable = HardGame.hasMetRequirement();
+        impossibleButton.interactable = ImpossibleGame.hasMetRequirement();
     }
 
     /**
