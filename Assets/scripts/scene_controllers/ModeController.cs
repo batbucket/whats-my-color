@@ -100,10 +100,10 @@ public class ModeController : MonoBehaviour {
 	}
 
 	void displayHiScores() {
-		GameObject.Find("EasyButton").GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(EasyGame.SCORE_LOCATION) == 0 ? "" : "" + PlayerPrefs.GetInt(EasyGame.SCORE_LOCATION);
-		GameObject.Find("NormalButton").GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(NormalGame.SCORE_LOCATION) == 0 ? "" : "" + PlayerPrefs.GetInt(NormalGame.SCORE_LOCATION);
-        GameObject.Find("HardButton").GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(HardGame.SCORE_LOCATION) == 0 ? "" : "" + PlayerPrefs.GetInt(HardGame.SCORE_LOCATION);
-        GameObject.Find("ImpossibleButton").GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(ImpossibleGame.SCORE_LOCATION) == 0 ? "" : "" + PlayerPrefs.GetInt(ImpossibleGame.SCORE_LOCATION);
+		GameObject.Find("EasyButton").GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(EasyGame.SCORE_LOCATION) == 0 ? "" : "" + PlayerPrefs.GetInt(EasyGame.HISCORE_LOCATION);
+		GameObject.Find("NormalButton").GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(NormalGame.SCORE_LOCATION) == 0 ? "" : "" + PlayerPrefs.GetInt(NormalGame.HISCORE_LOCATION);
+        GameObject.Find("HardButton").GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(HardGame.SCORE_LOCATION) == 0 ? "" : "" + PlayerPrefs.GetInt(HardGame.HISCORE_LOCATION);
+        GameObject.Find("ImpossibleButton").GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(ImpossibleGame.SCORE_LOCATION) == 0 ? "" : "" + PlayerPrefs.GetInt(ImpossibleGame.HISCORE_LOCATION);
     }
 
     void conditionalConfirmActivatedState() {
