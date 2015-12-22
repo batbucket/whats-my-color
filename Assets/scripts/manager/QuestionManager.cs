@@ -27,10 +27,10 @@ public class QuestionManager : MonoBehaviour {
 	 */
 	ColoredWordMode coloredWordMode;
 
-	public const string RIGHT_COLOR_TEXT = "What's the COLOR?";
-	public const string WRONG_COLOR_TEXT = "What's NOT the COLOR?";
-	public const string RIGHT_WORD_TEXT = "What's the WORD?";
-	public const string WRONG_WORD_TEXT = "What's NOT the WORD?";
+	public const string RIGHT_COLOR_TEXT = "What's my COLOR?";
+	public const string WRONG_COLOR_TEXT = "What's NOT my COLOR?";
+	public const string RIGHT_WORD_TEXT = "What's my WORD?";
+	public const string WRONG_WORD_TEXT = "What's NOT my WORD?";
 
 	public const string COLOR_MODE_TEXT = "■■■"; //Deprecated
 
