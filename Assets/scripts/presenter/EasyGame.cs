@@ -17,6 +17,11 @@ public class EasyGame : Game {
 		PlayerPrefs.SetInt(SCORE_LOCATION, score);
 	}
 
+    /**
+     * Modes are unlocked based on the hiscore in the previous
+     * Mode. Easy is automatically unlocked, but this method is
+     * Here for consistency.
+     */
     public static bool hasMetRequirement() {
         return true;
     }

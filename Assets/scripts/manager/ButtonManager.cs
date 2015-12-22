@@ -55,10 +55,17 @@ public class ButtonManager : MonoBehaviour {
 		setAllButtonModes(ButtonMode.COLOR);
 	}
 
+    /**
+     * There are two button modes
+     * Display Text and Display Color
+     */
 	void setButtonMode(ButtonMode mode, int buttonIndex) {
 		colorButtons[buttonIndex].setButtonMode(mode);
 	}
-
+    
+    /**
+     * Set the modes of all buttons
+     */
 	void setAllButtonModes(ButtonMode mode) {
 		for (int i = 0; i < colorButtons.Length; i++) {
 			setButtonMode(mode, i);
@@ -67,6 +74,7 @@ public class ButtonManager : MonoBehaviour {
 
 	/**
 	 * Swap the ColorWords of two buttons given their indicies
+     * In the array
      */
 	void swapColorWord(int a, int b) {
 		if (a < 0 || b < 0 

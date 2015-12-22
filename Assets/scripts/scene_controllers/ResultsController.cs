@@ -5,14 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class ResultsController : MonoBehaviour {
 
-    public const string GAME_OVER_APPEND = " GAME OVER";
+    public const string GAME_OVER_APPEND = " GAME OVER"; //___ GAME OVER
     public const string NEW_RECORD_TEXT = "Broke previous record of {0}!";
-    public const string FIRST_RECORD_TEST = "On the board.";
+    public const string FIRST_RECORD_TEST = "On the board."; //Message when hiscoring more than 0 in a mode
 
-    public const string WAITING_TEXT = "CAN RETURN IN {0:F1}";
+    public const string WAITING_TEXT = "CAN RETURN IN {0:F1}"; //Text on disabled return button
     public const string DONE_TEXT = "RETURN TO MODE SELECT";
-    public const float RETURN_DELAY = 1.0f;
-    public float currentDelay;
+    public const float RETURN_DELAY = .5f; //Time until can return to mode select
+    public float currentDelay; //Current delay on time until can return
 
     Text gameOverTitle;
     Text scoreTitle;
@@ -32,15 +32,54 @@ public class ResultsController : MonoBehaviour {
         newRecordMessage = GameObject.Find("Record").GetComponent<Text>();
         returnButton = GameObject.Find("Return").GetComponent<Button>();
 
+        clearNewRecordText();
+        disableReturnButton();
+        setGameOverTitle();
+        setAndUpdateScores();
+        setLossReason();
+	}
+
+    void updateScoreIfGreater(int score, string hiScoreLoc) {
+        if (score > PlayerPrefs.GetInt(hiScoreLoc)) {
+            Debug.Log("Score was greater. Replacing...");
+            if (PlayerPrefs.GetInt(hiScoreLoc) == 0) {
+                GameObject.Find("Record").GetComponent<Text>().text = FIRST_RECORD_TEST;
+            } else {
+                GameObject.Find("Record").GetComponent<Text>().text = string.Format(NEW_RECORD_TEXT, PlayerPrefs.GetInt(hiScoreLoc));
+            }
+            PlayerPrefs.SetInt(hiScoreLoc, score);
+        }
+    }
+
+    public void loadMode() {
+        SceneManager.LoadScene("Mode");
+    }
+
+    void disableReturnButton() {
         returnButton.interactable = false;
+    }
 
-        newRecordMessage.text = "";
+    /**
+     * Delay the return button's enable state so that
+     * a player can't accidently skip over the results screen
+     * in the case that they try to tap on a lower answer button
+     * and the time runs out before their finger makes the connection
+     */
+    void delayReturnButton() {
+        if ((currentDelay -= Time.deltaTime) < 0) {
+            returnButton.interactable = true;
+            returnButton.GetComponentInChildren<Text>().text = DONE_TEXT;
+        } else {
+            returnButton.GetComponentInChildren<Text>().text = string.Format(WAITING_TEXT, currentDelay);
+        }
+    }
 
-        gameOverTitle.text = PlayerPrefs.GetString(Game.GAME_MODE_LOCATION).ToUpper() + GAME_OVER_APPEND;
-        lossMessage.text = PlayerPrefs.GetString(Game.LOSS_REASON_LOCATION);
-
+    /**
+     * Sets scores and checks if a hiscore is broken or not
+     */
+    void setAndUpdateScores() {
         int scoreToSet = -1;
-	    switch (PlayerPrefs.GetInt(ModeController.MODE_ID_LOCATION)) {
+        switch (PlayerPrefs.GetInt(ModeController.MODE_ID_LOCATION)) {
             case EasyGame.ID:
                 gameOverTitle.text = "<color=green>" + gameOverTitle.text + "</color>";
                 scoreTitle.text = "<color=green>" + scoreTitle.text + "</color>";
@@ -69,31 +108,22 @@ public class ResultsController : MonoBehaviour {
                 throw new UnityException("Unknown Mode ID: " + PlayerPrefs.GetInt(ModeController.MODE_ID_LOCATION));
         }
         score.text = "" + scoreToSet;
-	}
-
-    void updateScoreIfGreater(int score, string hiScoreLoc) {
-        if (score > PlayerPrefs.GetInt(hiScoreLoc)) {
-            Debug.Log("Score was greater. Replacing...");
-            if (PlayerPrefs.GetInt(hiScoreLoc) == 0) {
-                GameObject.Find("Record").GetComponent<Text>().text = FIRST_RECORD_TEST;
-            } else {
-                GameObject.Find("Record").GetComponent<Text>().text = string.Format(NEW_RECORD_TEXT, PlayerPrefs.GetInt(hiScoreLoc));
-            }
-            PlayerPrefs.SetInt(hiScoreLoc, score);
-        }
     }
 
-    public void loadMode() {
-        SceneManager.LoadScene("Mode");
+    void clearNewRecordText() {
+        newRecordMessage.text = "";
+    }
+
+    void setGameOverTitle() {
+        gameOverTitle.text = PlayerPrefs.GetString(Game.GAME_MODE_LOCATION).ToUpper() + GAME_OVER_APPEND;
+    }
+
+    void setLossReason() {
+        lossMessage.text = PlayerPrefs.GetString(Game.LOSS_REASON_LOCATION);
     }
 	
 	// Update is called once per frame
 	void Update () {
-	    if ((currentDelay -= Time.deltaTime) < 0) {
-            returnButton.interactable = true;
-            returnButton.GetComponentInChildren<Text>().text = DONE_TEXT;
-        } else {
-            returnButton.GetComponentInChildren<Text>().text = string.Format(WAITING_TEXT, currentDelay);
-        }
+        delayReturnButton();
 	}
 }

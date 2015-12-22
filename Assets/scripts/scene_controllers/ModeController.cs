@@ -34,9 +34,13 @@ public class ModeController : MonoBehaviour {
 		displayHiScores();
 	}
 
-	public void confirmSelectionButtonClicked() {
+	public void loadGame() {
 		SceneManager.LoadScene("GenericGame");
 	}
+
+    public void loadStart() {
+        SceneManager.LoadScene("Start");
+    }
 
 	public void easyButtonClicked() {
 		setModeID(EasyGame.ID);
@@ -66,6 +70,9 @@ public class ModeController : MonoBehaviour {
 		return PlayerPrefs.GetInt(MODE_ID_LOCATION);
 	}
 
+    /**
+     * Extra text is added if there's a locked next mode
+     */
 	void displayDifficultyText() {
         string displayText = "";
 
@@ -100,12 +107,15 @@ public class ModeController : MonoBehaviour {
 	}
 
 	void displayHiScores() {
-		GameObject.Find("EasyButton").GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(EasyGame.SCORE_LOCATION) == 0 ? "" : "" + PlayerPrefs.GetInt(EasyGame.HISCORE_LOCATION);
-		GameObject.Find("NormalButton").GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(NormalGame.SCORE_LOCATION) == 0 ? "" : "" + PlayerPrefs.GetInt(NormalGame.HISCORE_LOCATION);
-        GameObject.Find("HardButton").GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(HardGame.SCORE_LOCATION) == 0 ? "" : "" + PlayerPrefs.GetInt(HardGame.HISCORE_LOCATION);
-        GameObject.Find("ImpossibleButton").GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(ImpossibleGame.SCORE_LOCATION) == 0 ? "" : "" + PlayerPrefs.GetInt(ImpossibleGame.HISCORE_LOCATION);
+		GameObject.Find("EasyButton").GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(EasyGame.HISCORE_LOCATION) == 0 ? "" : "" + PlayerPrefs.GetInt(EasyGame.HISCORE_LOCATION);
+		GameObject.Find("NormalButton").GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(NormalGame.HISCORE_LOCATION) == 0 ? "" : "" + PlayerPrefs.GetInt(NormalGame.HISCORE_LOCATION);
+        GameObject.Find("HardButton").GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(HardGame.HISCORE_LOCATION) == 0 ? "" : "" + PlayerPrefs.GetInt(HardGame.HISCORE_LOCATION);
+        GameObject.Find("ImpossibleButton").GetComponentInChildren<Text>().text = PlayerPrefs.GetInt(ImpossibleGame.HISCORE_LOCATION) == 0 ? "" : "" + PlayerPrefs.GetInt(ImpossibleGame.HISCORE_LOCATION);
     }
 
+    /**
+     * Button is disabled if no mode has ever been selected, say, on the first program run
+     */
     void conditionalConfirmActivatedState() {
         GameObject.Find("ConfirmSelectionButton").GetComponent<Button>().interactable = getModeID() != 0;
     }
@@ -120,6 +130,10 @@ public class ModeController : MonoBehaviour {
         }
     }
 
+    /**
+     * Modes are enabled as the user hits the high score requirements
+     * Otherwise they are not interactable
+     */
     void conditionalModes() {
         Button easyButton = GameObject.Find("EasyButton").GetComponent<Button>();
         Button normalButton = GameObject.Find("NormalButton").GetComponent<Button>();
@@ -134,6 +148,7 @@ public class ModeController : MonoBehaviour {
 
     /**
      * Debug use only
+     * Allows testing of the high score requirements
      */
     public void deletePlayerPrefs() {
         PlayerPrefs.DeleteAll();

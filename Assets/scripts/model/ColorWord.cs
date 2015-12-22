@@ -9,7 +9,10 @@ public class ColorWord {
 	public readonly string word;
 
 	/**
-	 * These arrays are meant to be paired.
+	 * Parallel arrays
+     * A dictionary is not used since we are using these for two purposes:
+     * To get a Color matching Word (same index) and to generate a random combination.
+     *
 	 * Example:
 	 * Index 0 of both should be Color.red and "Red"
 	 */

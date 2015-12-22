@@ -19,14 +19,14 @@ public class TimerManager : MonoBehaviour {
 	Color DISABLED_COLOR = Color.gray;
 	Color DEAD_COLOR = Color.black;
 	
-	float currentValue;
+	float currentValue; //Current value of the timer
 	const float INITIAL_CURRENT = 10;
 	
-	float maxValue;
+	float maxValue; //Value the timer will count down from
 	const float INITIAL_MAX = 10;
 	
-	bool initiated;
-	
+	bool initiated; //Determines if the timer is active or not
+    	
 	// Use this for initialization
 	void Awake () {
 		timeBar = gameObject.GetComponent<Image>();
@@ -79,6 +79,9 @@ public class TimerManager : MonoBehaviour {
 		maxValue = value;
 	}
 	
+    /**
+     * Scales the X of the time bar image
+     */
 	void setBarX() {
 		Vector3 scale = timeBarTransform.localScale;
 		scale.x = (currentValue / maxValue);
@@ -89,9 +92,9 @@ public class TimerManager : MonoBehaviour {
 		float value = 1 - (currentValue / maxValue);
 		Color color = Color.black;
 		if (value < TRANSITION_POINT) {
-			color = Color.Lerp (firstColor, secondColor, (1 - (currentValue / maxValue)) / TRANSITION_POINT);
+			color = Color.Lerp (firstColor, secondColor, (1 - (currentValue / maxValue)) / TRANSITION_POINT); //Go from first and second color before .5 on the timer
 		} else {
-			color = Color.Lerp (secondColor, thirdColor, (1 - (currentValue / maxValue) - TRANSITION_POINT) / TRANSITION_POINT);
+			color = Color.Lerp (secondColor, thirdColor, (1 - (currentValue / maxValue) - TRANSITION_POINT) / TRANSITION_POINT); //Go from second to third after .5 on the timer
 		}
 		timeBar.color = color;
 	}

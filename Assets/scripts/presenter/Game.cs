@@ -11,6 +11,9 @@ using UnityEngine.SceneManagement;
  * No time decay
  * One type of question: What is the correct color
  * No button shuffling
+ *
+ * Template methods are used significantly in this class
+ * Meant to be changed by its subclasses to increase the difficulty
  */
 abstract public class Game : MonoBehaviour {
 	protected QuestionManager questionManager;
@@ -141,7 +144,7 @@ abstract public class Game : MonoBehaviour {
 	} 
 
 	/**
-	 * This one just randomizes
+	 * This one just randomizes the next question
 	 */
 	protected virtual void nextQuestion() {
 		questionManager.randomizeColorWord();

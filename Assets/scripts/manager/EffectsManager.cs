@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.Assertions;
 
 public class EffectsManager : MonoBehaviour {
+
 	/**
 	 * Point to the success and failure gameobjects
 	 * which hold the their respective sounds and sprites
@@ -20,16 +21,25 @@ public class EffectsManager : MonoBehaviour {
 		Assert.IsNotNull(this.failure);
 	}
 
+    /**
+     * Correct answer FX
+     */
 	public void indicateSuccess() {
 		imageDisplay(success);
 		playSuccessSound();
 	}
 	
+    /**
+     * Incorrect answer FX
+     */
 	public void indicateFailure() {
 		imageDisplay(failure);
 		playFailureSound();
 	}
 	
+    /**
+     * Makes images fade out
+     */
 	void imageDecay() {
 		imageDecay(success);
 		imageDecay(failure);
@@ -43,6 +53,9 @@ public class EffectsManager : MonoBehaviour {
 		failure.GetComponent<AudioSource>().Play();
 	}
 
+    /**
+     * Reset image alpha and scale to initial
+     */
 	void imageDisplay(GameObject g) {
 		g.GetComponent<Transform>().localScale.Set(150, 150, 150);
 		Color c = g.GetComponent<SpriteRenderer>().color;

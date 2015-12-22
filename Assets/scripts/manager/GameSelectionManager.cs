@@ -5,23 +5,35 @@ public class GameSelectionManager : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		int difficulty = PlayerPrefs.GetInt(ModeController.MODE_ID_LOCATION);
-		if (difficulty == EasyGame.ID) {
-			Debug.Log ("EasyMode Loaded");
-			gameObject.AddComponent<EasyGame>();
-		} else if (difficulty == NormalGame.ID) {
-			Debug.Log ("NormalMode Loaded");
-			gameObject.AddComponent<NormalGame>();
-		} else if (difficulty == HardGame.ID) {
-			Debug.Log ("HardMode Loaded");
-			gameObject.AddComponent<HardGame>();
-		} else if (difficulty == ImpossibleGame.ID) {
-			Debug.Log ("ImpossibleMode Loaded");
-			gameObject.AddComponent<ImpossibleGame>();
-		} else {
-			throw new UnityException("Unknown difficulty ID: " + difficulty + ".");
-		}
+        setGameMode();
 	}
+
+    /**
+     * Determines which Game mode script to add to the Master GameObject
+     * Based on the selection made in the mode scene
+     */
+    void setGameMode() {
+        switch (PlayerPrefs.GetInt(ModeController.MODE_ID_LOCATION)) {
+            case EasyGame.ID:
+                Debug.Log("EasyMode Loaded");
+                gameObject.AddComponent<EasyGame>();
+                break;
+            case NormalGame.ID:
+                Debug.Log("NormalMode Loaded");
+                gameObject.AddComponent<NormalGame>();
+                break;
+            case HardGame.ID:
+                Debug.Log("HardMode Loaded");
+                gameObject.AddComponent<HardGame>();
+                break;
+            case ImpossibleGame.ID:
+                Debug.Log("ImpossibleMode Loaded");
+                gameObject.AddComponent<ImpossibleGame>();
+                break;
+            default:
+                throw new UnityException(string.Format("Unknown difficulty ID: {0}.", PlayerPrefs.GetInt(ModeController.MODE_ID_LOCATION)));
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {

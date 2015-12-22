@@ -12,7 +12,7 @@ public class HardGame : Game {
     public const string HISCORE_LOCATION = "Hard_Hiscore";
 
     public const float DECAY_RATE = .05f;
-	public const float TIME_FLOOR = 1.0f; //The minimum amount of time per question
+	public const float TIME_FLOOR = 0.2f; //The minimum amount of time per question
 
     public const int SCORE_REQUIREMENT = 15;
 
@@ -22,6 +22,9 @@ public class HardGame : Game {
 		base.resetTime();
 	}
 
+    /**
+     * Buttons are shuffled before the next question is posed
+     */
 	protected override void nextQuestion() {
 		buttonManager.shuffleButtons();
 		base.nextQuestion();
