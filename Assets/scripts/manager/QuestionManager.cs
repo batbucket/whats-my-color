@@ -98,11 +98,11 @@ public class QuestionManager : MonoBehaviour {
 		return colorWord;
 	}
 	
-	string getWord() {
+	public string getWord() {
 		return colorWord.word;
 	}
 	
-	Color getColor() {
+	public Color getColor() {
 		return colorWord.color;
 	}
 

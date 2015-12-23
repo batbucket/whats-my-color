@@ -22,7 +22,7 @@ public class ModeController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
+        Tool.unlockAchievement(Achievements.achievement_participation_medal); //'Unlock' Easy mode
 	}
 	
 	// Update is called once per frame

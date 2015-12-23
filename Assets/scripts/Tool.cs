@@ -2,6 +2,9 @@
 using System.Collections;
 using System;
 
+using GooglePlayGames;
+using UnityEngine.SocialPlatforms;
+
 public class Tool : MonoBehaviour {
 
     public static T GetRandomEnum<T>() {
@@ -72,4 +75,9 @@ public class Tool : MonoBehaviour {
         g.GetComponent<Transform>().localScale = cwScale;
     }
 
+    public static void unlockAchievement(string achievementID) {
+        Social.ReportProgress(achievementID, Achievements.UNLOCK, (bool success) => {
+            Debug.Log("Achievement status for " + achievementID + ": " + success);
+        });
+    }
 }

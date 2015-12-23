@@ -17,9 +17,11 @@ public class ResultsController : MonoBehaviour {
     Text gameOverTitle;
     Text scoreTitle;
     Text lossMessage;
-    Text score;
+    Text scoreText;
     Text newRecordMessage;
     Button returnButton;
+
+    int score;
 
     // Use this for initialization
     void Start () {
@@ -28,7 +30,7 @@ public class ResultsController : MonoBehaviour {
         gameOverTitle = GameObject.Find("GameOver").GetComponent<Text>();
         scoreTitle = GameObject.Find("Score").GetComponent<Text>();
         lossMessage = GameObject.Find("LossReason").GetComponent<Text>();
-        score = GameObject.Find("Count").GetComponent<Text>();
+        scoreText = GameObject.Find("Count").GetComponent<Text>();
         newRecordMessage = GameObject.Find("Record").GetComponent<Text>();
         returnButton = GameObject.Find("Return").GetComponent<Button>();
 
@@ -37,6 +39,8 @@ public class ResultsController : MonoBehaviour {
         setGameOverTitle();
         setAndUpdateScores();
         setLossReason();
+
+        achievementCheck();
 	}
 
     void updateScoreIfGreater(int score, string hiScoreLoc) {
@@ -107,7 +111,82 @@ public class ResultsController : MonoBehaviour {
             default:
                 throw new UnityException("Unknown Mode ID: " + PlayerPrefs.GetInt(ModeController.MODE_ID_LOCATION));
         }
-        score.text = "" + scoreToSet;
+        scoreText.text = "" + scoreToSet;
+        this.score = scoreToSet;
+    }
+
+    //Also includes leaderboards
+    void achievementCheck() {
+        int mode = PlayerPrefs.GetInt(ModeController.MODE_ID_LOCATION);
+
+        //Mode specific achievements
+        switch (mode) {
+            case EasyGame.ID:
+                if (score >= NormalGame.SCORE_REQUIREMENT) { Tool.unlockAchievement(Achievements.achievement_time_drops_in_decay); } //Unlock Normal mode
+                break;
+            case NormalGame.ID:
+                Social.ReportScore(score, Achievements.leaderboard_normal_mode, (bool success) => {
+                    Debug.Log("Post to Normal leaderboard status: " + success);
+                });
+                if (score >= HardGame.SCORE_REQUIREMENT) { Tool.unlockAchievement(Achievements.achievement_thanks_fisheryates); } //Unlock Hard mode
+                if (score >= Achievements.BRONZE_SCORE) { Tool.unlockAchievement(Achievements.achievement_normal_pencil); } //Normal bronze
+                if (score >= Achievements.SILVER_SCORE) { Tool.unlockAchievement(Achievements.achievement_normal_brush); } //Normal silver
+                if (score >= Achievements.GOLD_SCORE) { Tool.unlockAchievement(Achievements.achievement_normal_bucket); } //Normal gold
+                break;
+            case HardGame.ID:
+                Social.ReportScore(score, Achievements.leaderboard_hard_mode, (bool success) => {
+                    Debug.Log("Post to Hard leaderboard status: " + success);
+                });
+                if (score >= ImpossibleGame.SCORE_REQUIREMENT) { Tool.unlockAchievement(Achievements.achievement_your_reward_more_questions); } //Unlock Impossible mode
+                if (score >= Achievements.BRONZE_SCORE) { Tool.unlockAchievement(Achievements.achievement_hard_pencil); } //Hard bronze
+                if (score >= Achievements.SILVER_SCORE) { Tool.unlockAchievement(Achievements.achievement_hard_brush); } //Hard silver
+                if (score >= Achievements.GOLD_SCORE) { Tool.unlockAchievement(Achievements.achievement_hard_bucket); } //Hard gold
+                break;
+
+            case ImpossibleGame.ID:
+                Social.ReportScore(score, Achievements.leaderboard_impossible_mode, (bool success) => {
+                    Debug.Log("Post to Impossible leaderboard status: " + success);
+                });
+                if (score >= Achievements.BRONZE_SCORE) { Tool.unlockAchievement(Achievements.achievement_impossible_pencil); } //Impossible bronze
+                if (score >= Achievements.SILVER_SCORE) { Tool.unlockAchievement(Achievements.achievement_impossible_brush); } //Impossible silver
+                if (score >= Achievements.GOLD_SCORE) { Tool.unlockAchievement(Achievements.achievement_impossible_bucket); } //Impossible gold
+                break;
+
+            default:
+                throw new UnityException("Unknown ID: " + PlayerPrefs.GetInt(ModeController.MODE_ID_LOCATION));
+        }
+
+        /**
+         * General achievements
+         */
+        int easyHi = PlayerPrefs.GetInt(EasyGame.HISCORE_LOCATION);
+        int normalHi = PlayerPrefs.GetInt(NormalGame.HISCORE_LOCATION);
+        int hardHi = PlayerPrefs.GetInt(HardGame.HISCORE_LOCATION);
+        int impossibleHi = PlayerPrefs.GetInt(ImpossibleGame.HISCORE_LOCATION);
+
+        //All bronze unlock
+        if (easyHi >= Achievements.BRONZE_SCORE 
+            && normalHi >= Achievements.BRONZE_SCORE 
+            && hardHi >= Achievements.BRONZE_SCORE 
+            && impossibleHi >= Achievements.BRONZE_SCORE) {
+            Tool.unlockAchievement(Achievements.achievement_palette_novice);
+        }
+
+        //All silver unlock
+        if (easyHi >= Achievements.SILVER_SCORE
+            && normalHi >= Achievements.SILVER_SCORE
+            && hardHi >= Achievements.SILVER_SCORE
+            && impossibleHi >= Achievements.SILVER_SCORE) {
+            Tool.unlockAchievement(Achievements.achievement_palette_adept);
+        }
+
+        //All gold unlock
+        if (easyHi >= Achievements.GOLD_SCORE
+            && normalHi >= Achievements.GOLD_SCORE
+            && hardHi >= Achievements.GOLD_SCORE
+            && impossibleHi >= Achievements.GOLD_SCORE) {
+            Tool.unlockAchievement(Achievements.achievement_palette_master);
+        }
     }
 
     void clearNewRecordText() {

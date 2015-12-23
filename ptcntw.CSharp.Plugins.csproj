@@ -65,5 +65,12 @@
     <Compile Include="Assets\plugins\Extended ColorX.cs" />
     <Compile Include="Assets\plugins\HSBColor.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\GooglePlayGames\Editor\Podfile.txt" />
+    <None Include="Assets\GooglePlayGames\Editor\template-AndroidManifest.txt" />
+    <None Include="Assets\GooglePlayGames\Editor\template-Constants.txt" />
+    <None Include="Assets\GooglePlayGames\Editor\template-GameInfo.txt" />
+    <None Include="Assets\plugins\Android\MainLibProj\AndroidManifest.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

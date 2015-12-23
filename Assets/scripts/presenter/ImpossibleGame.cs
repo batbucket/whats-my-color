@@ -13,8 +13,8 @@ public class ImpossibleGame : Game {
 	public const string SCORE_LOCATION = "Impossible_Score";
     public const string HISCORE_LOCATION = "Impossible_Hiscore";
 
-    public const float DECAY_RATE = .05f;
-	public const float TIME_FLOOR = 0.2f; //The minimum amount of time per question
+    public const float DECAY_RATE = .02f;
+	public const float TIME_FLOOR = 0.1f; //The minimum amount of time per question
 
     public const int SCORE_REQUIREMENT = 20;
 

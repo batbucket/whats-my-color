@@ -22,7 +22,7 @@ abstract public class Game : MonoBehaviour {
 	protected TimerManager timerManager;
 	protected EffectsManager effectsManager;
 
-	public const float INITIAL_TIME_PER_QUESTION = 8.0f;
+	public const float INITIAL_TIME_PER_QUESTION = 5.0f;
 	protected float timePerQuestion;
 	protected int score;
 
@@ -104,7 +104,12 @@ abstract public class Game : MonoBehaviour {
 		if (isCorrectAnswer(cwOfButton)) {
 			correctAnswer();
 		} else {
-			saveLossReason(WRONG_ANSWER_MESSAGE);
+
+            //Check cyan and blue mix-up achievements
+            if (questionManager.getColor() == Color.cyan && cwOfButton.color == Color.blue) { Tool.unlockAchievement(Achievements.achievement_its_cyan_not_blue); }
+            if (questionManager.getColor() == Color.blue && cwOfButton.color == Color.cyan) { Tool.unlockAchievement(Achievements.achievement_its_blue_not_cyan); }
+
+            saveLossReason(WRONG_ANSWER_MESSAGE);
 			incorrectAnswer();
 		}
 	}
