@@ -45,7 +45,7 @@ public class StartController : MonoBehaviour {
         Social.ShowLeaderboardUI();
     }
 
-    public void startGooglePlay() {
+    void startGooglePlay() {
         Button achievements = GameObject.Find("Achievements").GetComponent<Button>();
         Button leaderboards = GameObject.Find("Leaderboards").GetComponent<Button>();
         Text failureText = GameObject.Find("Failure_Text").GetComponent<Text>();
