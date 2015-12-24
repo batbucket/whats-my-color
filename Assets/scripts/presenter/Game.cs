@@ -29,7 +29,7 @@ abstract public class Game : MonoBehaviour {
 	public const string GAME_MODE_LOCATION = "Game_Mode";
 	public const string LOSS_REASON_LOCATION = "Loss_Reason";
 	public const string TIME_OUT_MESSAGE = "OUT OF TIME...";
-	public const string WRONG_ANSWER_MESSAGE = "YOU CHOSE POORLY.";
+	public const string WRONG_ANSWER_MESSAGE = "A NATURAL MISTAKE.";
 
 	// Use this for initialization
 	void Awake () {
