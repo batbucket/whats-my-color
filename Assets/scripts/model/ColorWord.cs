@@ -16,7 +16,7 @@ public class ColorWord {
 	 * Example:
 	 * Index 0 of both should be Color.red and "Red"
 	 */
-	public static readonly Color[] approvedColors = new Color[] {Color.red, Color.yellow, Color.green, Color.blue, Color.cyan, Color.magenta};
+	public static readonly Color[] approvedColors = new Color[] {Color.red, Color.yellow, Color.green, Color.blue, Color.cyan, new Color(255.0f/255.0f, 105.0f/255.0f, 180.0f/255.0f)};
 	public static readonly string[] approvedWords = new string[] {"Red", "Yellow", "Green", "Blue", "Cyan", "Pink"};
 
 	public ColorWord(Color color, string word) {
@@ -30,14 +30,14 @@ public class ColorWord {
 	 * Only use this for generating questions, not randomizing the button order
 	 */
 	public static ColorWord generateRandomColorWord() {
-		return new ColorWord(approvedColors[UnityEngine.Random.Range(0, approvedColors.Length)], 
+		return new ColorWord(approvedColors[UnityEngine.Random.Range(0, approvedColors.Length)],
 		                     approvedWords[UnityEngine.Random.Range(0, approvedWords.Length)]);
 	}
 
 	/**
 	 * Creates a ColorWord whose Color matches its Word
 	 * Use this for button initialization in the Game presenter
-	 * 
+	 *
 	 * @param i the index of the approved arrays you want to generate the matching ColorWord for
 	 */
 	public static ColorWord generateMatchingColorWord(int i) {

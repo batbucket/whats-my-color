@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 /**
  * Impossible games have:
@@ -12,6 +13,8 @@ public class ImpossibleGame : Game {
 	public const int ID = 4;
 	public const string SCORE_LOCATION = "Impossible_Score";
     public const string HISCORE_LOCATION = "Impossible_Hiscore";
+    public const string MODE_DESCRIPTION = "<color=blue>IMPOSSIBLE: ???</color>";
+    public const string UNLOCK_DESCRIPTION = "<i><color=grey>SCORE {0}+ TO UNLOCK <color=blue>IMPOSSIBLE MODE</color>.</color></i>";
 
     public const float DECAY_RATE = .02f;
 	public const float TIME_FLOOR = 0.1f; //The minimum amount of time per question
@@ -23,7 +26,7 @@ public class ImpossibleGame : Game {
 		Debug.Log ("New time: " + timePerQuestion);
 		base.resetTime();
 	}
-	
+
     /**
      * Button modes are also randomized
      */

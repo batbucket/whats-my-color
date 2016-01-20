@@ -72,7 +72,7 @@ public class StartController : MonoBehaviour {
             Debug.Log("Achievement success: " + success);
         });
     }
-	
+
 	// Update is called once per frame
 	void Update () {
         Tool.bouncyEffect(GameObject.Find("Title"), MAX_SIZE_INCREASE, INCREASE_RATE);

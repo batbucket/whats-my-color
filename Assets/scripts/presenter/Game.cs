@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 /**
  * This class represents the most basic game mode:
- * 
+ *
  * X seconds per question
  * No time decay
  * One type of question: What is the correct color
@@ -57,7 +57,7 @@ abstract public class Game : MonoBehaviour {
 		setupButtonManager();
 		setUpTimerManager();
 	}
-	
+
 	void setupQuestionManager() {
 		nextQuestion();
 	}
@@ -116,7 +116,7 @@ abstract public class Game : MonoBehaviour {
 
 	/**
 	 * Conditions for a correct answer should go here
-	 * 
+	 *
 	 * For a basic game, the condition will be true if
 	 * the color held by the ColorButton (which should match its text)
 	 * matches the color held by the question
@@ -146,7 +146,7 @@ abstract public class Game : MonoBehaviour {
 		saveScore();
 		saveGameModeName();
 		SceneManager.LoadScene("GameEnd");
-	} 
+	}
 
 	/**
 	 * This one just randomizes the next question

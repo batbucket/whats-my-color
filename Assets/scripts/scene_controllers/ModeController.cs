@@ -11,20 +11,11 @@ public class ModeController : MonoBehaviour {
 	public const string NO_MODE_TEXT = "NO SELECTION";
     public const string HAS_MODE_TEXT = "CONFIRM SELECTION";
 
-	public const string EASY_MODE_TEXT = "<color=green>EASY: PICK THE COLOR, NOT THE WORD.</color>";
-	public const string NORMAL_MODE_TEXT = "<color=orange>NORMAL: TIME PER QUESTION DECAYS.</color>";
-	public const string HARD_MODE_TEXT = "<color=red>HARD: BUTTONS ARE RANDOMIZED.</color>";
-	public const string IMPOSSIBLE_MODE_TEXT = "<color=blue>IMPOSSIBLE: ???</color>";
-
-    public const string NORMAL_LOCKED_TEXT = "<i><color=grey>SCORE {0}+ TO UNLOCK <color=orange>NORMAL MODE</color>.</color></i>";
-    public const string HARD_LOCKED_TEXT = "<i><color=grey>SCORE {0}+ TO UNLOCK <color=red>HARD MODE</color>.</color></i>";
-    public const string IMPOSSIBLE_LOCKED_TEXT = "<i><color=grey>SCORE {0}+ TO UNLOCK <color=blue>IMPOSSIBLE MODE</color>.</color></i>";
-
     // Use this for initialization
     void Start () {
         Tool.unlockAchievement(Achievements.achievement_participation_medal); //'Unlock' Easy mode
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
         conditionalConfirmActivatedState();
@@ -55,7 +46,7 @@ public class ModeController : MonoBehaviour {
 	}
 
 	public void impossibleButtonClicked() {
-		setModeID(ImpossibleGame.ID);	
+		setModeID(ImpossibleGame.ID);
 	}
 
 	void setModeID(int ID) {
@@ -78,25 +69,25 @@ public class ModeController : MonoBehaviour {
 
 		switch(getModeID()) {
 		case EasyGame.ID:
-            displayText = EASY_MODE_TEXT;
+            displayText = EasyGame.MODE_DESCRIPTION;
             if (!NormalGame.hasMetRequirement()) {
-                displayText += "\n" + string.Format(NORMAL_LOCKED_TEXT, NormalGame.SCORE_REQUIREMENT);
+                displayText += "\n" + string.Format(NormalGame.UNLOCK_DESCRIPTION, NormalGame.SCORE_REQUIREMENT);
             }
             break;
 		case NormalGame.ID:
-            displayText = NORMAL_MODE_TEXT;
+            displayText = NormalGame.MODE_DESCRIPTION;
             if (!HardGame.hasMetRequirement()) {
-                displayText += "\n" + string.Format(HARD_LOCKED_TEXT, HardGame.SCORE_REQUIREMENT);
+                displayText += "\n" + string.Format(HardGame.UNLOCK_DESCRIPTION, HardGame.SCORE_REQUIREMENT);
             }
             break;
 		case HardGame.ID:
-            displayText = HARD_MODE_TEXT;
+            displayText = HardGame.MODE_DESCRIPTION;
             if (!ImpossibleGame.hasMetRequirement()) {
-                displayText += "\n" + string.Format(IMPOSSIBLE_LOCKED_TEXT, ImpossibleGame.SCORE_REQUIREMENT);
+                displayText += "\n" + string.Format(ImpossibleGame.UNLOCK_DESCRIPTION, ImpossibleGame.SCORE_REQUIREMENT);
             }
             break;
 		case ImpossibleGame.ID:
-            displayText = IMPOSSIBLE_MODE_TEXT;
+            displayText = ImpossibleGame.MODE_DESCRIPTION;
 			break;
 		default:
             displayText = "";
