@@ -16,8 +16,8 @@ public class ColorWord {
 	 * Example:
 	 * Index 0 of both should be Color.red and "Red"
 	 */
-	public static readonly Color[] approvedColors = new Color[] {Color.red, Color.yellow, Color.green, Color.blue, Color.cyan, new Color(255.0f/255.0f, 105.0f/255.0f, 180.0f/255.0f)};
-	public static readonly string[] approvedWords = new string[] {"Red", "Yellow", "Green", "Blue", "Cyan", "Pink"};
+	public static readonly Color[] approvedColors = new Color[] {Color.red, Color.yellow, Color.green, Color.blue, Color.cyan, new Color(95.0f/255.0f, 52.0f/255.0f, 95.0f/255.0f)};
+	public static readonly string[] approvedWords = new string[] {"Red", "Yellow", "Green", "Blue", "Cyan", "Purple"};
 
 	public ColorWord(Color color, string word) {
 		this.color = color;
