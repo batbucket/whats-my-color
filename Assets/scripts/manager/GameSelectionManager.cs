@@ -2,17 +2,17 @@
 using System.Collections;
 
 public class GameSelectionManager : MonoBehaviour {
-	
-	// Use this for initialization
-	void Start () {
-        setGameMode();
-	}
+
+    // Use this for initialization
+    void Start() {
+        SetGameMode();
+    }
 
     /**
      * Determines which Game mode script to add to the Master GameObject
      * Based on the selection made in the mode scene
      */
-    void setGameMode() {
+    void SetGameMode() {
         switch (PlayerPrefs.GetInt(ModeController.MODE_ID_LOCATION)) {
             case EasyGame.ID:
                 Debug.Log("EasyMode Loaded");
@@ -34,9 +34,9 @@ public class GameSelectionManager : MonoBehaviour {
                 throw new UnityException(string.Format("Unknown difficulty ID: {0}.", PlayerPrefs.GetInt(ModeController.MODE_ID_LOCATION)));
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    // Update is called once per frame
+    void Update() {
+
+    }
 }

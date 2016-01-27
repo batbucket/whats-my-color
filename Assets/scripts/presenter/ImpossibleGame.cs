@@ -10,38 +10,38 @@ using System;
  * 2 Button modes
  */
 public class ImpossibleGame : Game {
-	public const int ID = 4;
-	public const string SCORE_LOCATION = "Impossible_Score";
+    public const int ID = 4;
+    public const string SCORE_LOCATION = "Impossible_Score";
     public const string HISCORE_LOCATION = "Impossible_Hiscore";
     public const string MODE_DESCRIPTION = "<color=blue>IMPOSSIBLE: ???</color>";
     public const string UNLOCK_DESCRIPTION = "<i><color=grey>SCORE {0}+ TO UNLOCK <color=blue>IMPOSSIBLE MODE</color>.</color></i>";
 
     public const float DECAY_RATE = .02f;
-	public const float TIME_FLOOR = 0.1f; //The minimum amount of time per question
+    public const float TIME_FLOOR = 0.1f; //The minimum amount of time per question
 
     public const int SCORE_REQUIREMENT = 20;
 
-    protected override void resetTime() {
-		timePerQuestion = Mathf.Max(timePerQuestion * (1.0f - DECAY_RATE), TIME_FLOOR);
-		Debug.Log ("New time: " + timePerQuestion);
-		base.resetTime();
-	}
+    protected override void ResetTime() {
+        timePerQuestion = Mathf.Max(timePerQuestion * (1.0f - DECAY_RATE), TIME_FLOOR);
+        Debug.Log("New time: " + timePerQuestion);
+        base.ResetTime();
+    }
 
     /**
      * Button modes are also randomized
      */
-	protected override void nextQuestion() {
-		base.nextQuestion();
-		buttonManager.shuffleButtons();
-		buttonManager.randomizeButtonModes();
-		questionManager.randomizeQuestionMode();
-	}
+    protected override void NextQuestion() {
+        base.NextQuestion();
+        buttonManager.ShuffleButtons();
+        buttonManager.RandomizeColorButtons();
+        questionManager.RandomizeQuestionMode();
+    }
 
-	protected override void saveScore() {
-		PlayerPrefs.SetInt(SCORE_LOCATION, score);
-	}
+    protected override void SaveScore() {
+        PlayerPrefs.SetInt(SCORE_LOCATION, score);
+    }
 
-    public static bool hasMetRequirement() {
+    public static bool HasMetRequirement() {
         return PlayerPrefs.GetInt(HardGame.HISCORE_LOCATION) >= SCORE_REQUIREMENT;
     }
 }

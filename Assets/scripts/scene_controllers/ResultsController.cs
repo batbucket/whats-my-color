@@ -24,7 +24,7 @@ public class ResultsController : MonoBehaviour {
     int score;
 
     // Use this for initialization
-    void Start () {
+    void Start() {
         currentDelay = RETURN_DELAY;
 
         gameOverTitle = GameObject.Find("GameOver").GetComponent<Text>();
@@ -34,16 +34,16 @@ public class ResultsController : MonoBehaviour {
         newRecordMessage = GameObject.Find("Record").GetComponent<Text>();
         returnButton = GameObject.Find("Return").GetComponent<Button>();
 
-        clearNewRecordText();
-        disableReturnButton();
-        setGameOverTitle();
-        setAndUpdateScores();
-        setLossReason();
+        ClearNewRecordText();
+        DisableReturnButton();
+        SetGameOverTitle();
+        SetAndUpdateScores();
+        SetLossReason();
 
-        achievementCheck();
-	}
+        AchievementCheck();
+    }
 
-    void updateScoreIfGreater(int score, string hiScoreLoc) {
+    void UpdateScoreIfGreater(int score, string hiScoreLoc) {
         if (score > PlayerPrefs.GetInt(hiScoreLoc)) {
             Debug.Log("Score was greater. Replacing...");
             if (PlayerPrefs.GetInt(hiScoreLoc) == 0) {
@@ -55,11 +55,11 @@ public class ResultsController : MonoBehaviour {
         }
     }
 
-    public void loadMode() {
+    public void LoadMode() {
         SceneManager.LoadScene("Mode");
     }
 
-    void disableReturnButton() {
+    void DisableReturnButton() {
         returnButton.interactable = false;
     }
 
@@ -69,7 +69,7 @@ public class ResultsController : MonoBehaviour {
      * in the case that they try to tap on a lower answer button
      * and the time runs out before their finger makes the connection
      */
-    void delayReturnButton() {
+    void DelayReturnButton() {
         if ((currentDelay -= Time.deltaTime) < 0) {
             returnButton.interactable = true;
             returnButton.GetComponentInChildren<Text>().text = DONE_TEXT;
@@ -81,32 +81,32 @@ public class ResultsController : MonoBehaviour {
     /**
      * Sets scores and checks if a hiscore is broken or not
      */
-    void setAndUpdateScores() {
+    void SetAndUpdateScores() {
         int scoreToSet = -1;
         switch (PlayerPrefs.GetInt(ModeController.MODE_ID_LOCATION)) {
             case EasyGame.ID:
                 gameOverTitle.text = "<color=green>" + gameOverTitle.text + "</color>";
                 scoreTitle.text = "<color=green>" + scoreTitle.text + "</color>";
                 scoreToSet = PlayerPrefs.GetInt(EasyGame.SCORE_LOCATION);
-                updateScoreIfGreater(scoreToSet, EasyGame.HISCORE_LOCATION);
+                UpdateScoreIfGreater(scoreToSet, EasyGame.HISCORE_LOCATION);
                 break;
             case NormalGame.ID:
                 gameOverTitle.text = "<color=orange>" + gameOverTitle.text + "</color>";
                 scoreTitle.text = "<color=orange>" + scoreTitle.text + "</color>";
                 scoreToSet = PlayerPrefs.GetInt(NormalGame.SCORE_LOCATION);
-                updateScoreIfGreater(scoreToSet, NormalGame.HISCORE_LOCATION);
+                UpdateScoreIfGreater(scoreToSet, NormalGame.HISCORE_LOCATION);
                 break;
             case HardGame.ID:
                 gameOverTitle.text = "<color=red>" + gameOverTitle.text + "</color>";
                 scoreTitle.text = "<color=red>" + scoreTitle.text + "</color>";
                 scoreToSet = PlayerPrefs.GetInt(HardGame.SCORE_LOCATION);
-                updateScoreIfGreater(scoreToSet, HardGame.HISCORE_LOCATION);
+                UpdateScoreIfGreater(scoreToSet, HardGame.HISCORE_LOCATION);
                 break;
             case ImpossibleGame.ID:
                 gameOverTitle.text = "<color=blue>" + gameOverTitle.text + "</color>";
                 scoreTitle.text = "<color=blue>" + scoreTitle.text + "</color>";
                 scoreToSet = PlayerPrefs.GetInt(ImpossibleGame.SCORE_LOCATION);
-                updateScoreIfGreater(scoreToSet, ImpossibleGame.HISCORE_LOCATION);
+                UpdateScoreIfGreater(scoreToSet, ImpossibleGame.HISCORE_LOCATION);
                 break;
             default:
                 throw new UnityException("Unknown Mode ID: " + PlayerPrefs.GetInt(ModeController.MODE_ID_LOCATION));
@@ -116,7 +116,7 @@ public class ResultsController : MonoBehaviour {
     }
 
     //Also includes leaderboards
-    void achievementCheck() {
+    void AchievementCheck() {
         int mode = PlayerPrefs.GetInt(ModeController.MODE_ID_LOCATION);
 
         //Mode specific achievements
@@ -165,9 +165,9 @@ public class ResultsController : MonoBehaviour {
         int impossibleHi = PlayerPrefs.GetInt(ImpossibleGame.HISCORE_LOCATION);
 
         //All bronze unlock
-        if (easyHi >= Achievements.BRONZE_SCORE 
-            && normalHi >= Achievements.BRONZE_SCORE 
-            && hardHi >= Achievements.BRONZE_SCORE 
+        if (easyHi >= Achievements.BRONZE_SCORE
+            && normalHi >= Achievements.BRONZE_SCORE
+            && hardHi >= Achievements.BRONZE_SCORE
             && impossibleHi >= Achievements.BRONZE_SCORE) {
             Tool.unlockAchievement(Achievements.achievement_palette_novice);
         }
@@ -189,20 +189,20 @@ public class ResultsController : MonoBehaviour {
         }
     }
 
-    void clearNewRecordText() {
+    void ClearNewRecordText() {
         newRecordMessage.text = "";
     }
 
-    void setGameOverTitle() {
+    void SetGameOverTitle() {
         gameOverTitle.text = PlayerPrefs.GetString(Game.GAME_MODE_LOCATION).ToUpper() + GAME_OVER_APPEND;
     }
 
-    void setLossReason() {
+    void SetLossReason() {
         lossMessage.text = PlayerPrefs.GetString(Game.LOSS_REASON_LOCATION);
     }
-	
-	// Update is called once per frame
-	void Update () {
-        delayReturnButton();
-	}
+
+    // Update is called once per frame
+    void Update() {
+        DelayReturnButton();
+    }
 }

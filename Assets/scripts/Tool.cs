@@ -33,7 +33,7 @@ public class Tool : MonoBehaviour {
         string res = "";
         for (int i = 0; i < s.Length; i++) {
             string letter = s[i].ToString();
-            res += "<color=#" + Tool.colorToHex(ColorWord.generateRandomColorWord().color) + ">" + letter + "</color>";
+            res += "<color=#" + Tool.colorToHex(ColorWord.CreateRandomColorWord().color) + ">" + letter + "</color>";
         }
         return res;
     }
