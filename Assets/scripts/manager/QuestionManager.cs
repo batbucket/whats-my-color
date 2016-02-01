@@ -73,17 +73,24 @@ public class QuestionManager : MonoBehaviour {
     }
 
     public bool IsCorrectAnswer(ColorWord cw) {
-        if (questionMode == QuestionMode.RIGHT_COLOR) {
-            return cw.color.Equals(this.GetColor());
-        } else if (questionMode == QuestionMode.WRONG_COLOR) {
-            return !cw.color.Equals(this.GetColor());
-        } else if (questionMode == QuestionMode.RIGHT_WORD) {
-            return cw.word.Equals(this.GetWord());
-        } else if (questionMode == QuestionMode.WRONG_WORD) {
-            return !cw.word.Equals(this.GetWord());
-        } else {
-            throw new UnityException("Unknown enum type: " + this.questionMode);
+        bool result = false;
+        switch (questionMode) {
+            case QuestionMode.RIGHT_COLOR:
+                result = cw.color.Equals(this.GetColor());
+                break;
+            case QuestionMode.WRONG_COLOR:
+                result = !cw.color.Equals(this.GetColor());
+                break;
+            case QuestionMode.RIGHT_WORD:
+                result = cw.word.Equals(this.GetWord());
+                break;
+            case QuestionMode.WRONG_WORD:
+                result = !cw.word.Equals(this.GetWord());
+                break;
+            default:
+                throw new UnityException("Unknown enum type: " + this.questionMode);
         }
+        return result;
     }
 
     public ColoredWordMode GetColoredWordMode() {

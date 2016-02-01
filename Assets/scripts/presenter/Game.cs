@@ -31,6 +31,14 @@ abstract public class Game : MonoBehaviour {
     public const string TIME_OUT_MESSAGE = "OUT OF TIME...";
     public const string WRONG_ANSWER_MESSAGE = "A NATURAL MISTAKE.";
 
+    /**
+     * If the user is holding down a button and time runs out, the game
+     * will first check if the currentButton down has the correct answer
+     * and count it as correct if so,
+     * otherwise, the game ends as normal
+     */
+    ColorButton currentButtonDown;
+
     // Use this for initialization
     void Awake() {
         this.questionManager = gameObject.GetComponentInChildren<QuestionManager>();
@@ -81,23 +89,35 @@ abstract public class Game : MonoBehaviour {
 
         /**
 		 * Set up the ColorWords associated with the buttons
+         * and the listeners of the buttons
 		 */
-        for (int i = 0; i < cbs.Length; i++) {
-            cbs[i].SetColorWord(ColorWord.CreateMatchingColorWord(i));
-        }
+        int index = 0;
+        foreach (ColorButton cb in buttonManager.GetColorButtons()) {
+            cb.SetColorWord(ColorWord.CreateMatchingColorWord(index++));
 
-        /**
-		 * Set up the listeners of the buttons
-		 */
-        for (int i = 0; i < cbs.Length; i++) {
-            ColorButton cb = cbs[i];
-            cb.GetButton().onClick.AddListener(() => {
-                SubmitAnswer(cb.GetColorWord());
+            /**
+             * We set cb2 = cb since foreach loops are weird.
+             *
+             * Basically, cb changes with each iteration of the loop
+             * so cb in the lambdas change on each new iteration of the loop
+             * ultimately becoming whatever is the last element of the loop
+             * so all 6 buttons would submit the same answer, which we don't want.
+             *
+             * Setting a cb2 = cb creates a new ColorButton variable on each loop
+             * Ensuring that the cb in the lambda expression does not change with
+             * each iteration.
+             *
+             * See: https://goo.gl/4wp7Hb and https://goo.gl/0ez7YV
+             */
+            ColorButton cb2 = cb;
+            cb2.GetButton().onClick.AddListener(() => {
+                SubmitAnswer(cb2.GetColorWord());
             });
+            cb2.OnMouseDownAction = () => currentButtonDown = cb2;
+            cb2.OnMouseUpAction = () => currentButtonDown = null;
         }
 
         buttonManager.ShuffleButtons(); //Shuffle once
-
     }
 
     void SubmitAnswer(ColorWord cwOfButton) {
@@ -189,8 +209,12 @@ abstract public class Game : MonoBehaviour {
 	 */
     void Update() {
         if (IsOutOfTime()) {
-            SaveLossReason(TIME_OUT_MESSAGE);
-            OnIncorrectAnswer();
+            if (currentButtonDown != null) {
+                SubmitAnswer(currentButtonDown.GetColorWord());
+            } else {
+                SaveLossReason(TIME_OUT_MESSAGE);
+                OnIncorrectAnswer();
+            }
         }
     }
 }

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Assertions;
 using System.Collections;
+using System;
 
 public class ColorButton : MonoBehaviour {
 
@@ -11,6 +12,9 @@ public class ColorButton : MonoBehaviour {
     public static readonly Color WORD_MODE_COLOR = Color.white;
     bool colorWordSet;
 
+    public Action OnMouseDownAction { get; set; }
+    public Action OnMouseUpAction { get; set; }
+
     const int DEFAULT_FONT_SIZE = 80;
 
     // Use this for initialization
@@ -18,8 +22,17 @@ public class ColorButton : MonoBehaviour {
         this.button = gameObject.GetComponent<Button>();
         this.buttonMode = ButtonMode.WORD;
         this.colorWord = new ColorWord(Color.grey, "UNDEFINED"); //Change this with setting the colorWord
-
         Assert.IsNotNull(this.button);
+        OnMouseDownAction = () => { };
+        OnMouseUpAction = () => { };
+    }
+
+    public void OnMouseDown() {
+        OnMouseDownAction.Invoke();
+    }
+
+    public void OnMouseUp() {
+        OnMouseUpAction.Invoke();
     }
 
     public Button GetButton() {
