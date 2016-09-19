@@ -5,5 +5,12 @@ https://play.google.com/store/apps/details?id=com.sharr.WhatsMyColor
 * A mobile quiz game based on the Stroop Effect written in C# using the Unity engine for Android.
 * Incorporates Google's Social, Leaderboards, and Achievements API.
 
-# Summary #
-This repository holds the code for my Stroop effect-inspired mobile quiz game for Android. I'm proud of the fact that I was able to develop and finish a game from the beginning to the end that I can call mine on the Google Play store. I've learned a great deal about how Unity's component based scripting works, and the importance of adhering to an architectural pattern early on. I also now know how Google's Leaderboards and Achievements APIs work. Although my code hierarchy for this project doesn't match Model-View-Presenter perfectly, I hope to enforce a more stricter structure for my future Unity projects.
+# Features #
+* Leaderboards to compare yourself to your friends and others
+* Achievements because that's a game industry standard now
+* Four game modes, 3 of which are unlockable
+* Good UI design, such as: 
+
+1. The giant "Sign in" button blocking access to Leaderboards and Achievements buttons to show what you need to do first.
+
+2. The delay on the results screen's "Return to mode selection" button's activation to prevent the situation where a player attempts to on a bottom button during a game but time runs out, causing them to hit the "Return to mode selection" button on the next screen instead.
