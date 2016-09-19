@@ -13,4 +13,4 @@ https://play.google.com/store/apps/details?id=com.sharr.WhatsMyColor
 
 1. The giant "Sign in" button blocking access to Leaderboards and Achievements buttons to show what you need to do first.
 
-2. The delay on the results screen's "Return to mode selection" button's activation to prevent the situation where a player attempts to on a bottom button during a game but time runs out, causing them to hit the "Return to mode selection" button on the next screen instead.
+2. The delay on the results screen's "Return to mode selection" button's activation to prevent the situation where a player attempts to tap on a bottom button during a game, but time runs out before their finger makes contact, causing them to tap the "Return to mode selection" button on the next screen instead, thereby booting them out of the Results scene without being able to view their score.
