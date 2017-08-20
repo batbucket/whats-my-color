@@ -9,8 +9,3 @@ https://play.google.com/store/apps/details?id=com.sharr.WhatsMyColor
 * Leaderboards to compare yourself to your friends and others
 * Achievements because that's a game industry standard now
 * Four game modes, 3 of which are unlockable
-* Good UI design, such as: 
-
-1. The giant "Sign in" button blocking access to Leaderboards and Achievements buttons to show what you need to do first.
-
-2. The delay on the results screen's "Return to mode selection" button's activation to prevent the situation where a player attempts to tap on a bottom button during a game, but time runs out before their finger makes contact, causing them to tap the "Return to mode selection" button on the next screen instead, thereby booting them out of the Results scene without being able to view their score.
